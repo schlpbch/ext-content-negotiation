@@ -215,27 +215,37 @@ const capabilities = {
 
 ## Contributing
 
-This is a **draft proposal** seeking community feedback:
+This SEP has been **formally submitted** to the MCP community for review:
 
-1. **Review** the specification
-2. **Comment** on GitHub issues
+1. **Review** the specification (in `SEP-DRAFT-agent-content-negotiation.md`)
+2. **Provide feedback** on [GitHub issue #2291](https://github.com/modelcontextprotocol/specification/issues/2291)
 3. **Test** with your server/client implementation
-4. **Suggest** improvements or alternatives
+4. **Suggest** improvements or refinements
 
-Community input shapes the final design!
+Community input and feedback will shape the final design and help determine if this feature is accepted into the MCP specification.
 
 ## Links
 
 - **MCP Specification**: https://modelcontextprotocol.io/specification
 - **RFC 2295**: https://tools.ietf.org/html/rfc2295 (Transparent Content Negotiation)
 - **SEP Process**: https://modelcontextprotocol.io/community/sep-guidelines
+- **SEP Submission**: [MCP Specification Repository Issue #2291](https://github.com/modelcontextprotocol/specification/issues/2291)
+- **This Repository**: https://github.com/schlpbch/agentic-content-negotiation
 
 ## Status
 
-- **Status**: Draft
+- **Status**: Submitted for Review
 - **Type**: Standards Track
 - **Created**: February 22, 2026
-- **Author**: Community (seeking sponsorship)
+- **Submitted**: February 22, 2026
+- **SEP Review Issue**: [modelcontextprotocol/specification#2291](https://github.com/modelcontextprotocol/specification/issues/2291)
+- **Author**: Community (seeking SEP number assignment and sponsorship)
+
+### Submission Timeline
+
+- **Draft Phase**: Community feedback and refinement (ongoing)
+- **In-Review Phase**: Awaiting MCP core maintainer review and SEP number assignment
+- **Final Phase**: Approval and integration into MCP specification
 
 ---
 
