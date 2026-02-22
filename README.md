@@ -1,5 +1,5 @@
 [![Status: Submitted for Review](https://img.shields.io/badge/Status-Submitted%20for%20Review-blue?style=flat-square)](https://github.com/modelcontextprotocol/specification/issues/2290)
-[![Version: v0.9](https://img.shields.io/badge/Version-v0.9-brightgreen?style=flat-square)](https://github.com/schlpbch/agentic-content-negotiation/releases/tag/v0.9)
+[![Version: v0.9.0](https://img.shields.io/badge/Version-v0.9.0-brightgreen?style=flat-square)](https://github.com/schlpbch/agentic-content-negotiation/releases/tag/v0.9.0)
 [![Type: Standards Track](https://img.shields.io/badge/Type-Standards%20Track-orange?style=flat-square)](#status)
 
 # Agentic Content Negotiation for MCP
