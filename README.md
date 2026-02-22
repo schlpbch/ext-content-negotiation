@@ -8,7 +8,7 @@
 >
 > This SEP has been submitted for review. Join the discussion on [GitHub issue #2290](https://github.com/modelcontextprotocol/specification/issues/2290) to provide feedback and help shape the proposal.
 
-A formal Specification Enhancement Proposal (SEP) for transparent content negotiation in the Model Context Protocol (MCP), inspired by RFC 2295.
+A formal Specification Enhancement Proposal (SEP) for transparent content negotiation in the Model Context Protocol (MCP), inspired by [RFC 2295](https://www.rfc-editor.org/rfc/rfc2295.html) (Transparent Content Negotiation for HTTP).
 
 ## Overview
 
@@ -65,7 +65,7 @@ Servers respond with content optimized for those capabilities:
 
 ## Key Features
 
-- [x] **RFC 2295-Inspired**: Borrows concepts from HTTP transparent content negotiation, adapted to MCP
+- [x] **[RFC 2295](https://www.rfc-editor.org/rfc/rfc2295.html)-Inspired**: Borrows concepts from HTTP transparent content negotiation, adapted to MCP
 - [x] **Session-Scoped**: Negotiation happens once at initialization, not per-request
 - [x] **Capability-Driven**: Feature tags mirror client's actual MCP capabilities
 - [x] **Flexible Predicates**: Supports presence, negation, and equality syntax
@@ -235,7 +235,7 @@ Community input and feedback will shape the final design and help determine if t
 ## Links
 
 - **MCP Specification**: https://modelcontextprotocol.io/specification
-- **RFC 2295**: https://tools.ietf.org/html/rfc2295 (Transparent Content Negotiation)
+- **RFC 2295**: https://www.rfc-editor.org/rfc/rfc2295.html (Transparent Content Negotiation for HTTP)
 - **SEP Process**: https://modelcontextprotocol.io/community/sep-guidelines
 - **SEP Submission**: [MCP Specification Repository Issue #2291](https://github.com/modelcontextprotocol/specification/issues/2290)
 - **This Repository**: https://github.com/schlpbch/agentic-content-negotiation
