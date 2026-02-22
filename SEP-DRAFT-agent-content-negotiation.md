@@ -92,15 +92,15 @@ All workarounds share a root problem: **servers cannot negotiate content with cl
 
 ### Real-World Use Cases Failing Today
 
-#### 1. **SBB Journey Service (Public Transport)**
-- **Problem**: Tool results for `find_trips` are prose descriptions of train connections. An AI agent needs structured data (departure times, platform numbers, train types).
+#### 1. **Journey Service (Public Transport)**
+- **Problem**: Tool results are prose descriptions of connections. An AI agent needs structured data (departure times, platform numbers, vehicle types).
 - **Current**: Two separate endpoints, confusing the LLM
 - **Needed**: One tool, content shape varies by client capability
 
-#### 2. **Swiss Tourism Data**
-- **Problem**: Sight descriptions are rich narratives (history, visitor tips, seasonal advice). An agent composing a multi-day itinerary needs just coordinates, opening hours, and categories.
-- **Current**: Agents strip markdown, waste context, get confused
-- **Needed**: Server returns JSON for agents, markdown for humans
+#### 2. **Geospatial/Mapping Service**
+- **Problem**: Geographic data comes as rich narratives (landmarks, directions, history). An agent building a route needs coordinates, boundaries, and feature types. A human needs readable descriptions.
+- **Current**: Agents strip formatting, waste context; humans can't parse raw GeoJSON
+- **Needed**: Server returns GeoJSON for agents, markdown for humans
 
 #### 3. **Weather/Environment Services**
 - **Problem**: Agentic clients want structured data; human clients want narrative
@@ -375,9 +375,9 @@ Server logic: **If tag is present and does NOT equal value, apply behavior**
   "result": {
     "contents": [
       {
-        "uri": "tourism://sights/matterhorn",
+        "uri": "map://features/alpine-valley-1",
         "mimeType": "application/json",
-        "text": "{\"name\": \"Matterhorn\", \"coordinates\": {\"latitude\": 45.9763, \"longitude\": 7.6586}, \"elevation_m\": 4478, \"categories\": [\"mountain\", \"hiking\", \"photography\"], \"best_months\": [\"June\", \"September\"], \"accessibility\": [\"experienced\"], \"opening_hours\": null}"
+        "text": "{\"type\": \"Feature\", \"geometry\": {\"type\": \"Point\", \"coordinates\": [7.6586, 45.9763]}, \"properties\": {\"name\": \"Alpine Valley\", \"elevation_m\": 3200, \"feature_types\": [\"valley\", \"hiking\", \"scenic\"], \"boundaries\": {\"north\": 45.98, \"south\": 45.96, \"east\": 7.67, \"west\": 7.65}, \"accessibility\": \"moderate\", \"area_km2\": 4.2}}"
       }
     ]
   }
@@ -392,9 +392,9 @@ Server logic: **If tag is present and does NOT equal value, apply behavior**
   "result": {
     "contents": [
       {
-        "uri": "tourism://sights/matterhorn",
+        "uri": "map://features/alpine-valley-1",
         "mimeType": "text/markdown",
-        "text": "# Matterhorn\n\n## Overview\nThe iconic Matterhorn (Italian: Cervino) is one of the most recognizable peaks in the world. At 4,478 meters (14,692 feet), it straddles the border between Switzerland and Italy in the Valais region.\n\n## Visiting\n- **Best Time**: June-September (snow-free above ~3,000m)\n- **Accessibility**: Experienced climbers and hikers only\n- **Nearest Town**: Zermatt (Switzerland)\n- **Classification**: Alpine peak, serious mountaineering required\n\n## Photography\nThe north face (Hörnli Ridge) offers dramatic climbing routes and spectacular photography opportunities, especially at sunrise. The pyramid shape is iconic from the Riffelalp viewpoint near Zermatt.\n\n## Climate Note\nWeather changes rapidly above 4,000m. Plan accordingly."
+        "text": "# Alpine Valley - Scenic Hiking Destination\n\n## Location\n**Coordinates**: 45.9763°N, 7.6586°E\n**Elevation**: 3,200 meters (10,500 feet)\n**Coverage Area**: Approximately 4.2 km²\n\n## Overview\nA pristine alpine valley surrounded by dramatic peaks and diverse ecosystems. Perfect for hiking, photography, and experiencing alpine flora and fauna.\n\n## Access & Conditions\n- **Difficulty**: Moderate (suitable for intermediate hikers)\n- **Best Season**: June through September (snow-free)\n- **Estimated Hike Time**: 4-6 hours depending on route\n- **Water Sources**: Mountain streams and natural springs\n\n## Features\n- Mountain meadows with wildflowers (peak bloom: July-August)\n- Several hiking trails with varying difficulty levels\n- Natural spring-fed pools\n- 360° views of surrounding peaks\n\n## Planning Tip\nBring layers and sun protection. Weather can change rapidly in alpine areas. Sunrise and sunset offer spectacular photography opportunities."
       }
     ]
   }
@@ -704,13 +704,13 @@ RFC 2295 defined a full two-phase content negotiation system with variant metada
 
 ### Handling Existing Use Cases
 
-#### SBB Journey Service
+#### Journey Service
 - **Before**: One tool returns prose, needs to be parsed by agent
 - **After**: Agent declares `format=json`, tool returns structured data directly
 
-#### Swiss Tourism
-- **Before**: Server returns narrative, agent wastes context stripping markdown
-- **After**: Agent declares `format=json, mcp-capable`, server returns JSON with URIs and metadata
+#### Geospatial/Mapping Service
+- **Before**: Server returns descriptions, agent wastes context parsing text
+- **After**: Agent declares `format=json, mcp-capable`, server returns GeoJSON with coordinates and properties
 
 #### Multi-Agent Orchestration
 - **Before**: Orchestrator doesn't know what format each specialist agent needs
@@ -783,7 +783,7 @@ This proposal is **fully backward compatible**:
 - Ecosystem gains experience with the feature
 
 **Phase 2 (6-12 months)**: SEP reaches Final status
-- Core servers (SBB, tourism, weather) implement negotiation
+- Core servers (journey, mapping, weather) implement negotiation
 - SDKs provide helper functions for feature declaration
 - Best practices documented
 
@@ -1200,7 +1200,7 @@ Server behavior: Log warning, ignore invalid tags, use defaults
 This proposal is inspired by:
 - **RFC 2295 (Transparent Content Negotiation in HTTP)**: For the core concept of clients declaring capabilities and servers selecting variants
 - **MCP Specification**: For the capability negotiation model
-- **Real use cases** from SBB, Swiss tourism, and weather services: For motivating the problem
+- **Real use cases** from journey, mapping, and weather services: For motivating the problem
 - **Community discussion** on MCP extensibility: For validating the need
 
 ---

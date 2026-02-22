@@ -70,9 +70,9 @@ Servers respond with content optimized for those capabilities:
 - **Problem**: Agent needs structured train data; human needs readable itinerary
 - **Solution**: One tool, negotiated format (JSON for agent, markdown for human)
 
-### 2. Swiss Tourism
-- **Problem**: Sight descriptions are rich narratives; agents need just coordinates/categories
-- **Solution**: Server returns `application/json` for agents, `text/markdown` for humans
+### 2. Geospatial/Mapping Service
+- **Problem**: Geographic data comes as rich descriptions; agents need coordinates/boundaries
+- **Solution**: Server returns `application/json` (GeoJSON) for agents, `text/markdown` for humans
 
 ### 3. Multi-Agent Orchestration
 - **Problem**: Different specialist agents have different capabilities
