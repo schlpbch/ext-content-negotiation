@@ -1,4 +1,12 @@
+[![Status: Submitted for Review](https://img.shields.io/badge/Status-Submitted%20for%20Review-blue?style=flat-square)](https://github.com/modelcontextprotocol/specification/issues/2291)
+[![Version: v0.9](https://img.shields.io/badge/Version-v0.9-brightgreen?style=flat-square)](https://github.com/schlpbch/agentic-content-negotiation/releases/tag/v0.9)
+[![Type: Standards Track](https://img.shields.io/badge/Type-Standards%20Track-orange?style=flat-square)](#status)
+
 # Agentic Content Negotiation for MCP
+
+> **📋 Formally Submitted to MCP Community**
+>
+> This SEP has been submitted for review. Join the discussion on [GitHub issue #2291](https://github.com/modelcontextprotocol/specification/issues/2291) to provide feedback and help shape the proposal.
 
 A formal Specification Enhancement Proposal (SEP) for transparent content negotiation in the Model Context Protocol (MCP), inspired by RFC 2295.
 
