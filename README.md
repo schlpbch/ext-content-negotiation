@@ -66,8 +66,8 @@ Servers respond with content optimized for those capabilities:
 
 ## Real-World Use Cases
 
-### 1. SBB Journey Service
-- **Problem**: Agent needs structured train data; human needs readable itinerary
+### 1. Journey Service
+- **Problem**: Agent needs structured connection data; human needs readable itinerary
 - **Solution**: One tool, negotiated format (JSON for agent, markdown for human)
 
 ### 2. Geospatial/Mapping Service
