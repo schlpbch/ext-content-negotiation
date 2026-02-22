@@ -1,4 +1,4 @@
-[![Status: Submitted for Review](https://img.shields.io/badge/Status-Submitted%20for%20Review-blue?style=flat-square)](https://github.com/modelcontextprotocol/specification/issues/2291)
+[![Status: Submitted for Review](https://img.shields.io/badge/Status-Submitted%20for%20Review-blue?style=flat-square)](https://github.com/modelcontextprotocol/specification/issues/2290)
 [![Version: v0.9](https://img.shields.io/badge/Version-v0.9-brightgreen?style=flat-square)](https://github.com/schlpbch/agentic-content-negotiation/releases/tag/v0.9)
 [![Type: Standards Track](https://img.shields.io/badge/Type-Standards%20Track-orange?style=flat-square)](#status)
 
@@ -226,7 +226,7 @@ const capabilities = {
 This SEP has been **formally submitted** to the MCP community for review:
 
 1. **Review** the specification (in `SEP-DRAFT-agent-content-negotiation.md`)
-2. **Provide feedback** on [GitHub issue #2291](https://github.com/modelcontextprotocol/specification/issues/2291)
+2. **Provide feedback** on [GitHub issue #2290](https://github.com/modelcontextprotocol/specification/issues/2290)
 3. **Test** with your server/client implementation
 4. **Suggest** improvements or refinements
 
@@ -237,7 +237,7 @@ Community input and feedback will shape the final design and help determine if t
 - **MCP Specification**: https://modelcontextprotocol.io/specification
 - **RFC 2295**: https://www.rfc-editor.org/rfc/rfc2295.html (Transparent Content Negotiation for HTTP)
 - **SEP Process**: https://modelcontextprotocol.io/community/sep-guidelines
-- **SEP Submission**: [MCP Specification Repository Issue #2291](https://github.com/modelcontextprotocol/specification/issues/2290)
+- **SEP Submission**: [MCP Specification Repository Issue #2290](https://github.com/modelcontextprotocol/specification/issues/2290)
 - **This Repository**: https://github.com/schlpbch/agentic-content-negotiation
 
 ## Status
@@ -246,7 +246,7 @@ Community input and feedback will shape the final design and help determine if t
 - **Type**: Standards Track
 - **Created**: February 22, 2026
 - **Submitted**: February 22, 2026
-- **SEP Review Issue**: [modelcontextprotocol/specification#2291](https://github.com/modelcontextprotocol/specification/issues/2290)
+- **SEP Review Issue**: [modelcontextprotocol/specification#2290](https://github.com/modelcontextprotocol/specification/issues/2290)
 - **Author**: Community (seeking SEP number assignment and sponsorship)
 
 ### Submission Timeline
