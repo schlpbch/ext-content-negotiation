@@ -57,12 +57,12 @@ Servers respond with content optimized for those capabilities:
 
 ## Key Features
 
-✅ **RFC 2295-Inspired**: Borrows concepts from HTTP transparent content negotiation, adapted to MCP
-✅ **Session-Scoped**: Negotiation happens once at initialization, not per-request
-✅ **Capability-Driven**: Feature tags mirror client's actual MCP capabilities
-✅ **Flexible Predicates**: Supports presence, negation, and equality syntax
-✅ **Fully Backward Compatible**: Zero breaking changes, optional feature
-✅ **Secure**: Feature tags are for content shape only, never for auth/access control
+[x] **RFC 2295-Inspired**: Borrows concepts from HTTP transparent content negotiation, adapted to MCP
+[x] **Session-Scoped**: Negotiation happens once at initialization, not per-request
+[x] **Capability-Driven**: Feature tags mirror client's actual MCP capabilities
+[x] **Flexible Predicates**: Supports presence, negation, and equality syntax
+[x] **Fully Backward Compatible**: Zero breaking changes, optional feature
+[x] **Secure**: Feature tags are for content shape only, never for auth/access control
 
 ## Real-World Use Cases
 
