@@ -724,6 +724,29 @@ RFC 2295 represents an early (experimental) attempt to solve scalable content ne
 
 ---
 
+## Application to MCP
+
+This analysis directly informed the development of **SEP-DRAFT-agent-content-negotiation.md**, which proposes transparent content negotiation for the Model Context Protocol.
+
+**Key Concepts Adopted**:
+- Feature tag syntax (presence, negation, equality predicates)
+- Session-scoped capability declaration
+- Server-side variant selection based on client capabilities
+- Graceful fallback for unsupported features
+
+**Key Concepts Adapted**:
+- Simplified from RFC 2295's two-phase exchange to single-phase (MCP's stateful model)
+- Feature tags mirror MCP capabilities (sampling, elicitation, roots, tasks)
+- Removed complex caching and entity tag validation (not applicable to MCP)
+
+**Links**:
+- **SEP Draft**: SEP-DRAFT-agent-content-negotiation.md
+- **SEP Request**: https://github.com/modelcontextprotocol/modelcontextprotocol/issues/2291
+- **Repository**: https://github.com/schlpbch/agentic-content-negotiation
+
+---
+
 **Analysis Prepared**: February 22, 2026
 **Source**: RFC 2295, IETF
 **Status**: Experimental (1998)
+**Application Status**: Concepts applied to MCP SEP draft (February 2026)

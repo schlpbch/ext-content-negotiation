@@ -1187,7 +1187,31 @@ MCP enables a growing ecosystem of AI-powered applications and specialized servi
 
 ---
 
+## Application to Content Negotiation
+
+This analysis informed the design of **SEP-DRAFT-agent-content-negotiation.md**, which extends MCP's capability negotiation system to enable content negotiation based on client-declared capabilities.
+
+**Key MCP Concepts Leveraged**:
+- **Capability Negotiation Model** (Section 7) - Extended to include content negotiation
+- **Session-Scoped Design** (Section 6) - Content negotiation declared once at `initialize`
+- **Client Capabilities** (Section 7) - Feature tags mirror existing capabilities (sampling, elicitation, roots, tasks)
+- **Backward Compatibility** - New capability is optional, zero breaking changes
+
+**SEP Design Principles Aligned with MCP**:
+1. **Servers should be easy to build** - Simple feature tag matching in tool responses
+2. **Servers should be composable** - Content negotiation works across multiple servers
+3. **Servers have limited visibility** - Features negotiate only within session
+4. **Features can be added progressively** - New feature tags can emerge without spec updates
+
+**Links**:
+- **SEP Draft**: SEP-DRAFT-agent-content-negotiation.md
+- **SEP Request**: https://github.com/modelcontextprotocol/modelcontextprotocol/issues/2291
+- **Repository**: https://github.com/schlpbch/agentic-content-negotiation
+
+---
+
 **Analysis Prepared**: February 22, 2026
 **MCP Version**: Draft (2025-11-25)
 **Protocol Maturity**: Experimental/Community-driven
 **Repository Status**: Active development
+**SEP Status**: Draft (February 2026)

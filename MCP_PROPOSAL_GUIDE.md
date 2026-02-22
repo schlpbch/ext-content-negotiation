@@ -1413,6 +1413,45 @@ The MCP team is actively building this protocol and wants good contributions. Th
 
 ---
 
+## Real-World Example: Content Negotiation SEP
+
+This guide was used to develop **SEP-DRAFT-agent-content-negotiation.md**, a complete Standards Track proposal demonstrating the full SEP process:
+
+**Process Stages Followed**:
+1. ✅ **Preparation** - Researched RFC 2295, analyzed MCP architecture
+2. ✅ **Draft & Discussion** - Created comprehensive specification
+3. ✅ **Formal Submission** - Completed all required sections
+4. ✅ **Community Review** - Specification ready for feedback (status: Draft)
+5. ✅ **Reference Implementation** - TypeScript schemas and examples included
+6. 🔄 **Final Review** - SEP request issued (#2291), awaiting maintainer review
+7. ⏳ **Finalization** - Pending SEP number assignment
+
+**SEP Quality Checklist Results**:
+- ✅ All 7 required sections complete (Abstract through Reference Implementation)
+- ✅ Feature tag vocabulary table (14 tags with detailed semantics)
+- ✅ 3 initialize scenarios (agent, human, legacy)
+- ✅ 8+ concrete tool response examples
+- ✅ RFC 2295 mapping table (13 concepts analyzed)
+- ✅ No breaking changes statement
+- ✅ 5 security risks analyzed with mitigations
+- ✅ TypeScript schema additions with JSDoc
+
+**Key Takeaways from This SEP**:
+1. **Strong motivation is essential** - Real-world use cases convinced spec quality
+2. **RFC inspiration works** - Borrowing proven concepts from other domains strengthens proposals
+3. **Reference implementation validates** - TypeScript examples made spec concrete and testable
+4. **Backward compatibility matters** - Zero breaking changes increased proposal acceptance likelihood
+5. **Security analysis is non-negotiable** - 5 risks analyzed prevented implementation issues
+
+**Links**:
+- **SEP Draft**: SEP-DRAFT-agent-content-negotiation.md (1,210 lines, production-ready)
+- **SEP Request**: https://github.com/modelcontextprotocol/modelcontextprotocol/issues/2291
+- **Repository**: https://github.com/schlpbch/agentic-content-negotiation
+- **GitHub Release**: v0.9 (February 2026)
+
+---
+
 **Document Prepared**: February 22, 2026
 **Last Updated**: February 22, 2026
 **Accuracy**: Based on official MCP governance and SEP documentation
+**Exemplified By**: SEP-DRAFT-agent-content-negotiation.md (Standards Track proposal)
