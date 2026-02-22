@@ -6,7 +6,7 @@
 
 > **📋 Formally Submitted to MCP Community**
 >
-> This SEP has been submitted for review. Join the discussion on [GitHub issue #2291](https://github.com/modelcontextprotocol/specification/issues/2291) to provide feedback and help shape the proposal.
+> This SEP has been submitted for review. Join the discussion on [GitHub issue #2290](https://github.com/modelcontextprotocol/specification/issues/2290) to provide feedback and help shape the proposal.
 
 A formal Specification Enhancement Proposal (SEP) for transparent content negotiation in the Model Context Protocol (MCP), inspired by RFC 2295.
 
