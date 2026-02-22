@@ -237,7 +237,7 @@ Community input and feedback will shape the final design and help determine if t
 - **MCP Specification**: https://modelcontextprotocol.io/specification
 - **RFC 2295**: https://tools.ietf.org/html/rfc2295 (Transparent Content Negotiation)
 - **SEP Process**: https://modelcontextprotocol.io/community/sep-guidelines
-- **SEP Submission**: [MCP Specification Repository Issue #2291](https://github.com/modelcontextprotocol/specification/issues/2291)
+- **SEP Submission**: [MCP Specification Repository Issue #2291](https://github.com/modelcontextprotocol/specification/issues/2290)
 - **This Repository**: https://github.com/schlpbch/agentic-content-negotiation
 
 ## Status
@@ -246,7 +246,7 @@ Community input and feedback will shape the final design and help determine if t
 - **Type**: Standards Track
 - **Created**: February 22, 2026
 - **Submitted**: February 22, 2026
-- **SEP Review Issue**: [modelcontextprotocol/specification#2291](https://github.com/modelcontextprotocol/specification/issues/2291)
+- **SEP Review Issue**: [modelcontextprotocol/specification#2291](https://github.com/modelcontextprotocol/specification/issues/2290)
 - **Author**: Community (seeking SEP number assignment and sponsorship)
 
 ### Submission Timeline
