@@ -1,15 +1,33 @@
-# SEP-XXXX: Transparent Content Negotiation for MCP Agent Clients
+# SEP-XXXX: Content Negotiation Extension
 
 - **Status**: Draft
-- **Type**: Standards Track
+- **Type**: Extensions Track
+- **Extension ID**: `io.modelcontextprotocol/content-negotiation`
 - **Created**: 2026-02-22
 - **Author(s)**: (Community Draft)
 - **Sponsor**: (Seeking)
 - **PR**: (To be filled)
+- **Extension Repository**: (To be created at `https://github.com/modelcontextprotocol/ext-content-negotiation`)
 
 ## Abstract
 
-MCP servers cannot distinguish between AI agent clients and human-facing clients, leading to one-size-fits-all content that serves neither audience well. This SEP proposes a **transparent content negotiation** mechanism inspired by RFC 2295, where clients declare their capabilities during the `initialize` handshake, and servers respond with structurally different content variants optimized for those capabilities. The key insight is that negotiation axes are **the client's declared MCP capabilities** (sampling, elicitation, roots, tasks, etc.), not generic "agent" vs "human" labels. A server knowing that a client has `sampling` but no `elicitation` should produce different output than when the client has both—because the client's actual protocol capabilities determine what responses are useful. This mechanism is session-scoped, declared once at initialization, and fully backward compatible.
+This extension introduces **content negotiation** to MCP, enabling clients and servers to negotiate response format based on client capabilities and preferences.
+
+The core problem: MCP servers cannot distinguish between AI agent clients and human-facing clients, leading to one-size-fits-all content that serves neither audience well. This extension proposes a **transparent content negotiation** mechanism inspired by RFC 2295, where clients declare their capabilities during the `initialize` handshake, and servers respond with structurally different content variants optimized for those capabilities.
+
+The key insight is that negotiation axes are **the client's declared MCP capabilities** (sampling, elicitation, roots, tasks, etc.), not generic "agent" vs "human" labels. A server knowing that a client has `sampling` but no `elicitation` should produce different output than when the client has both—because the client's actual protocol capabilities determine what responses are useful.
+
+This extension is **optional** and **fully backward compatible**: servers without it behave identically to today's protocol; clients without it work unchanged with any server.
+
+## About This Extension
+
+This SEP proposes an official MCP extension following the framework defined in [SEP-2133: Extensions](https://modelcontextprotocol.io/community/seps/2133-extensions).
+
+- **Extension ID**: `io.modelcontextprotocol/content-negotiation`
+- **Scope**: Adds optional `contentNegotiation` capability to `ClientCapabilities` and `ServerCapabilities`
+- **Impact**: Allows clients to declare content preferences; servers may vary response format accordingly
+- **Adoption**: Optional; clients and servers may ignore this extension entirely with no loss of conformance
+- **Versioning**: Independently versioned from core protocol; may evolve without core protocol changes
 
 ## Motivation
 
@@ -142,9 +160,17 @@ This matches MCP's design: capabilities are declared at `initialize`, not per-me
 
 ## Specification
 
-### New Client Capability: `contentNegotiation`
+This extension adds two new optional capabilities to the MCP protocol: `contentNegotiation` for clients and `contentNegotiation` for servers.
 
-Clients MAY declare the `contentNegotiation` capability in the `initialize` request:
+### Extension Identifier
+
+```
+io.modelcontextprotocol/content-negotiation
+```
+
+### Client Extension Capability: `contentNegotiation`
+
+Clients implementing this extension MAY declare the `contentNegotiation` capability in the `initialize` request:
 
 ```json
 {
@@ -192,9 +218,9 @@ export interface ClientContentNegotiationCapability {
 }
 ```
 
-### New Server Capability: `contentNegotiation`
+### Server Extension Capability: `contentNegotiation`
 
-Servers MAY declare the `contentNegotiation` capability in the `initialize` response to signal they honor negotiated content:
+Servers implementing this extension MAY declare the `contentNegotiation` capability in the `initialize` response to signal they honor negotiated content:
 
 ```json
 {
@@ -229,6 +255,45 @@ export interface ServerContentNegotiationCapability {
   honored: true;
 }
 ```
+
+### Extension Advertisement
+
+Following SEP-2133, clients and servers advertise support for this extension via the `extensions` field in capabilities:
+
+**Client advertising support**:
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-11-25",
+    "capabilities": {
+      "extensions": {
+        "io.modelcontextprotocol/content-negotiation": {}
+      }
+    }
+  }
+}
+```
+
+**Server advertising support**:
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "protocolVersion": "2025-11-25",
+    "capabilities": {
+      "extensions": {
+        "io.modelcontextprotocol/content-negotiation": {}
+      }
+    }
+  }
+}
+```
+
+Clients and servers MAY declare support in the `extensions` field, but the feature tags are still declared via the `contentNegotiation` capability as described above. Both mechanisms can coexist.
 
 ### Feature Tag Registry (Initial v1.0)
 
@@ -445,10 +510,21 @@ Server logic: **If tag is present and does NOT equal value, apply behavior**
 }
 ```
 
+### Extension Adoption and Graceful Degradation
+
+**Opt-In Nature**:
+- This extension is entirely optional. Clients are not required to declare it; servers are not required to implement it.
+- Absence of this extension does not impact protocol conformance for either client or server.
+
+**Graceful Degradation**:
+- If a **client declares** `contentNegotiation` but a **server does not support** this extension, the server MUST respond with default content (identical to non-negotiating behavior).
+- If a **server supports** this extension but a **client does not declare** it, the server MUST return default content (identical to pre-negotiation behavior).
+- Extension support is determined by checking the `contentNegotiation` capability in the `initialize` handshake.
+
 ### Behavioral Requirements
 
 **Requirement 1: MUST Support Backward Compatibility**
-Servers without the `contentNegotiation` capability (or clients without declaring it) behave identically to today's protocol. This is not a breaking change.
+Servers without the `contentNegotiation` capability (or clients without declaring it) behave identically to today's protocol. This extension adds no mandatory requirements to existing implementations.
 
 **Requirement 2: SHOULD Declare Declared Capabilities in Features**
 If a client declares `sampling: {}` in capabilities, it SHOULD also declare `"sampling"` in `contentNegotiation.features`. This is a SHOULD-level recommendation (not enforced), but clarifies intent: one field signals protocol availability, the other signals how to use it.
@@ -767,44 +843,47 @@ How does this SEP relate to RFC 2295's concepts?
 
 ## Backward Compatibility
 
-### No Breaking Changes
+This extension is **fully backward compatible** with the core MCP protocol, following SEP-2133 principles:
 
-This proposal is **fully backward compatible**:
+### Core Protocol Compatibility
 
-1. **New capability is optional**: Clients are not required to declare `contentNegotiation`
-2. **Server support is optional**: Servers need not implement content negotiation
-3. **Default behavior unchanged**: Absence of negotiated features produces identical results to today
+1. **Extension is optional**: Neither clients nor servers are required to declare or support this extension
+2. **Non-breaking**: This extension adds only new optional capabilities; it removes, renames, or changes no existing protocol elements
+3. **No mandatory fields**: All fields introduced by this extension are optional
+4. **Graceful degradation**: Clients and servers without this extension continue to function without modification
 
-### Migration Path
+### Migration Path for Ecosystem
 
-**Phase 1 (Immediate)**: This SEP is published as Draft
-- Servers can implement content negotiation as a preview
-- Clients can experiment with feature declarations
-- Ecosystem gains experience with the feature
+**Phase 1 (Immediate)**: This extension is submitted as Draft
+- Early adopters can implement content negotiation in their servers and clients
+- Ecosystem gains experience with feature declarations
+- Feature tag semantics emerge through community use
 
-**Phase 2 (6-12 months)**: SEP reaches Final status
-- Core servers (journey, mapping, weather) implement negotiation
+**Phase 2 (6-12 months)**: Extension reaches Final status (if accepted)
+- Wider adoption; major servers implement negotiation
 - SDKs provide helper functions for feature declaration
-- Best practices documented
+- Best practices and conventions stabilize
 
-**Phase 3 (2+ years)**: Potential standardization
-- Feature tag registry stabilizes (what tags should be standard vs vendor-specific?)
-- Servers commonly support content negotiation
-- New clients assume support is available
+**Phase 3 (2+ years)**: Potential future standardization (optional)
+- Successful extensions may transition to core protocol features
+- This extension may remain optional indefinitely (as many extensions do)
+- Not all extensions require or should have core protocol status
 
-### What Existing Code MUST Do
+### Existing Implementations
 
-Existing servers and clients require **no changes** to remain compatible. They can:
-- Ignore the `contentNegotiation` capability declaration (if clients send it)
-- Omit `contentNegotiation` from their capability response
-- Return identical content regardless of feature tags
+Existing servers and clients require **zero changes** to remain compatible:
+- They may safely ignore the `contentNegotiation` capability if declared
+- They may omit it from their response
+- They will return identical content to all clients
 
-### Deprecation Timeline
+### Versioning and Evolution
 
-No deprecation is planned. Content negotiation is additive:
-- Old clients work with new servers
-- New clients work with old servers
-- Optimal experience: both new
+This extension follows independent versioning (separate from core protocol versions). Future versions may:
+- Add new feature tags
+- Refine negotiation semantics
+- Introduce new use cases
+
+Breaking changes MUST use a new extension identifier (e.g., `io.modelcontextprotocol/content-negotiation-v2`).
 
 ## Security Implications
 
@@ -880,6 +959,16 @@ No deprecation is planned. Content negotiation is additive:
 ## Reference Implementation
 
 This section describes how implementations can adopt content negotiation.
+
+### SDK Implementation Guidance
+
+SDKs implementing this extension SHOULD:
+- Disable the extension by default; require explicit opt-in by applications
+- Document supported extension features in SDK documentation
+- Provide helper functions for parsing and matching feature tags (see example below)
+- Consider packaging the extension separately or behind a feature flag
+
+SDKs are under no obligation to implement this extension or accept contributed implementations. Extension support is not required for protocol conformance.
 
 ### TypeScript Schema Changes
 
@@ -1195,16 +1284,30 @@ Server behavior: Log warning, ignore invalid tags, use defaults
 
 3. **Quality Factors (v1.1)**: Should future versions support RFC 2295's quality degradation syntax for feature combinations?
 
+## Extension Governance
+
+Following SEP-2133, this extension is proposed for official MCP status:
+
+- **Target Repository**: `https://github.com/modelcontextprotocol/ext-content-negotiation`
+- **Extension Maintainers**: (To be appointed by core MCP maintainers upon acceptance)
+- **Working Group**: Interested community members may form a working group to guide development and gather feedback
+- **Review Process**: Per SEP-2133 Extensions Track; requires at least one reference implementation in an official SDK prior to final review
+
 ## Acknowledgments
 
-This proposal is inspired by:
+This extension is inspired by:
 - **RFC 2295 (Transparent Content Negotiation in HTTP)**: For the core concept of clients declaring capabilities and servers selecting variants
-- **MCP Specification**: For the capability negotiation model
-- **Real use cases** from journey, mapping, and weather services: For motivating the problem
-- **Community discussion** on MCP extensibility: For validating the need
+- **SEP-2133 (Extensions)**: For the extension framework and governance model
+- **MCP Specification**: For the capability negotiation model and session-scoped design patterns
+- **Real use cases** from journey, mapping, weather, and multi-agent orchestration services: For motivating the problem
+- **Community discussion** on MCP extensibility: For validating the need for content adaptation
 
 ---
 
 **Created**: February 22, 2026
 **Status**: Draft
-**Next Steps**: Community feedback, consideration of Final status timeline
+**Type**: Extensions Track
+**Next Steps**:
+1. Community feedback on extension approach and feature tag vocabulary
+2. Reference implementation in official MCP SDKs
+3. Submission to core maintainers for review under Extensions Track process (SEP-2133)

@@ -1,14 +1,15 @@
-[![Status: Submitted for Review](https://img.shields.io/badge/Status-Submitted%20for%20Review-blue?style=flat-square)](https://github.com/modelcontextprotocol/specification/issues/2290)
-[![Version: v0.9.0](https://img.shields.io/badge/Version-v0.9.0-brightgreen?style=flat-square)](https://github.com/schlpbch/agentic-content-negotiation/releases/tag/v0.9.0)
-[![Type: Standards Track](https://img.shields.io/badge/Type-Standards%20Track-orange?style=flat-square)](#status)
+[![Status: Draft](https://img.shields.io/badge/Status-Draft-yellow?style=flat-square)](#status)
+[![Version: v1.0-draft](https://img.shields.io/badge/Version-v1.0--draft-blue?style=flat-square)](https://github.com/schlpbch/agentic-content-negotiation/releases)
+[![Type: Extensions Track](https://img.shields.io/badge/Type-Extensions%20Track-purple?style=flat-square)](#status)
+[![Extension ID: io.modelcontextprotocol/content-negotiation](https://img.shields.io/badge/Extension-io.modelcontextprotocol/content--negotiation-brightblue?style=flat-square)](#about-this-extension)
 
-# Agentic Content Negotiation for MCP
+# Content Negotiation Extension for MCP
 
-> **📋 Formally Submitted to MCP Community**
+> **📦 Official MCP Extension Proposal**
 >
-> This SEP has been submitted for review. Join the discussion on [GitHub issue #2290](https://github.com/modelcontextprotocol/specification/issues/2290) to provide feedback and help shape the proposal.
+> This is a proposed official MCP extension following [SEP-2133: Extensions](https://modelcontextprotocol.io/community/seps/2133-extensions). It introduces transparent content negotiation to allow servers to adapt response formats based on client capabilities.
 
-A formal Specification Enhancement Proposal (SEP) for transparent content negotiation in the Model Context Protocol (MCP), inspired by [RFC 2295](https://www.rfc-editor.org/rfc/rfc2295.html) (Transparent Content Negotiation for HTTP).
+A formal proposal for a **Content Negotiation Extension** to the Model Context Protocol (MCP), enabling clients to declare preferences and servers to adapt content format accordingly. Inspired by [RFC 2295](https://www.rfc-editor.org/rfc/rfc2295.html) (Transparent Content Negotiation for HTTP), adapted for MCP's session-scoped architecture.
 
 ## Overview
 
@@ -223,37 +224,59 @@ const capabilities = {
 
 ## Contributing
 
-This SEP has been **formally submitted** to the MCP community for review:
+We welcome community feedback on this extension proposal:
 
-1. **Review** the specification (in `SEP-DRAFT-agent-content-negotiation.md`)
-2. **Provide feedback** on [GitHub issue #2290](https://github.com/modelcontextprotocol/specification/issues/2290)
-3. **Test** with your server/client implementation
-4. **Suggest** improvements or refinements
+1. **Review** the specification in `SEP-DRAFT-agent-content-negotiation.md`
+2. **Provide feedback** via:
+   - This repository's [Issues](https://github.com/schlpbch/agentic-content-negotiation/issues)
+   - [MCP Community Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions)
+   - Working groups (if established)
+3. **Test** reference implementations with your server/client code
+4. **Suggest** improvements or refinements to feature tags, semantics, or design
 
-Community input and feedback will shape the final design and help determine if this feature is accepted into the MCP specification.
+### Next Steps for Contributors
+
+- **Read and review** `SEP-DRAFT-agent-content-negotiation.md`
+- **Implement** reference support in your SDK or server
+- **Report issues** and learnings back to this repository
+- **Advocate** for the extension if you find it valuable for your use cases
+
+Community input will shape the final design and determine whether this extension graduates to official MCP status.
 
 ## Links
 
+### MCP Resources
 - **MCP Specification**: https://modelcontextprotocol.io/specification
-- **RFC 2295**: https://www.rfc-editor.org/rfc/rfc2295.html (Transparent Content Negotiation for HTTP)
+- **SEP-2133: Extensions Framework**: https://modelcontextprotocol.io/community/seps/2133-extensions
 - **SEP Process**: https://modelcontextprotocol.io/community/sep-guidelines
-- **SEP Submission**: [MCP Specification Repository Issue #2290](https://github.com/modelcontextprotocol/specification/issues/2290)
+- **MCP Community**: https://github.com/modelcontextprotocol/modelcontextprotocol
+
+### Technical References
+- **RFC 2295**: https://www.rfc-editor.org/rfc/rfc2295.html (Transparent Content Negotiation for HTTP)
 - **This Repository**: https://github.com/schlpbch/agentic-content-negotiation
+- **Extension Specification**: `SEP-DRAFT-agent-content-negotiation.md` (this repository)
+
+## About This Extension
+
+- **Extension ID**: `io.modelcontextprotocol/content-negotiation`
+- **Framework**: Proposed under [SEP-2133: Extensions](https://modelcontextprotocol.io/community/seps/2133-extensions)
+- **Target Repository**: `https://github.com/modelcontextprotocol/ext-content-negotiation` (upon approval)
 
 ## Status
 
-- **Status**: Submitted for Review
-- **Type**: Standards Track
+- **Status**: Draft
+- **Type**: Extensions Track
 - **Created**: February 22, 2026
-- **Submitted**: February 22, 2026
-- **SEP Review Issue**: [modelcontextprotocol/specification#2290](https://github.com/modelcontextprotocol/specification/issues/2290)
-- **Author**: Community (seeking SEP number assignment and sponsorship)
+- **Current Phase**: Community feedback and design refinement
+- **Next Phase**: Formal submission as SEP with Extensions Track type + reference implementation
 
 ### Submission Timeline
 
-- **Draft Phase**: Community feedback and refinement (ongoing)
-- **In-Review Phase**: Awaiting MCP core maintainer review and SEP number assignment
-- **Final Phase**: Approval and integration into MCP specification
+- **Draft Phase** (current): Community feedback, design refinement
+- **Implementation Phase**: Reference implementations in official MCP SDKs
+- **SEP Submission**: Formal submission with Extensions Track type to MCP specification repository
+- **Review Phase**: Core maintainer review under SEP-2133 Extensions Track process
+- **Final Phase**: Acceptance as official extension and repository creation
 
 ---
 
