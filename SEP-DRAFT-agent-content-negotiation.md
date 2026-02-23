@@ -168,9 +168,9 @@ This extension adds two new optional capabilities to the MCP protocol: `contentN
 io.modelcontextprotocol/content-negotiation
 ```
 
-### Client Extension Capability: `contentNegotiation`
+### Client Extension Settings
 
-Clients implementing this extension MAY declare the `contentNegotiation` capability in the `initialize` request:
+Clients implementing this extension MAY declare support via the `extensions` field in `ClientCapabilities`, with settings containing version and feature tags:
 
 ```json
 {
@@ -181,15 +181,17 @@ Clients implementing this extension MAY declare the `contentNegotiation` capabil
     "protocolVersion": "2025-11-25",
     "capabilities": {
       "sampling": {},
-      "contentNegotiation": {
-        "version": "1.0",
-        "features": [
-          "agent",
-          "mcp-capable",
-          "!interactive",
-          "verbosity=compact",
-          "format=json"
-        ]
+      "extensions": {
+        "io.modelcontextprotocol/content-negotiation": {
+          "version": "1.0",
+          "features": [
+            "agent",
+            "mcp-capable",
+            "!interactive",
+            "verbosity=compact",
+            "format=json"
+          ]
+        }
       }
     },
     "clientInfo": {
@@ -200,27 +202,35 @@ Clients implementing this extension MAY declare the `contentNegotiation` capabil
 }
 ```
 
-### `ClientContentNegotiationCapability` Interface
+### Extension Settings Schema
+
+The extension defines a settings object with the following structure:
 
 ```typescript
-export interface ClientContentNegotiationCapability {
+export interface ContentNegotiationSettings {
   /**
    * Version of the content negotiation protocol.
    * Allows future evolution with version-aware servers.
+   * Current version: "1.0"
    */
-  version: string;  // e.g., "1.0"
+  version: string;
 
   /**
-   * Feature tags declaring client capabilities and preferences.
-   * See Feature Tag Registry section.
+   * Feature tags declaring client capabilities and preferences (client only).
+   * Servers do not include this field.
+   *
+   * Tags can be:
+   * - Presence: "agent", "sampling" (tag is present)
+   * - Negation: "!interactive" (tag is absent)
+   * - Equality: "format=json", "verbosity=compact" (tag has value)
    */
-  features: string[];
+  features?: string[];  // Only in client request
 }
 ```
 
-### Server Extension Capability: `contentNegotiation`
+### Server Extension Settings
 
-Servers implementing this extension MAY declare the `contentNegotiation` capability in the `initialize` response to signal they honor negotiated content:
+Servers implementing this extension MAY declare support via the `extensions` field in `ServerCapabilities`. An empty settings object indicates support:
 
 ```json
 {
@@ -233,8 +243,8 @@ Servers implementing this extension MAY declare the `contentNegotiation` capabil
       "prompts": { "listChanged": true },
       "resources": { "subscribe": true, "listChanged": true },
       "tools": { "listChanged": true },
-      "contentNegotiation": {
-        "honored": true
+      "extensions": {
+        "io.modelcontextprotocol/content-negotiation": {}
       }
     },
     "serverInfo": {
@@ -244,56 +254,6 @@ Servers implementing this extension MAY declare the `contentNegotiation` capabil
   }
 }
 ```
-
-### `ServerContentNegotiationCapability` Interface
-
-```typescript
-export interface ServerContentNegotiationCapability {
-  /**
-   * Indicates server will vary response format based on negotiated features.
-   */
-  honored: true;
-}
-```
-
-### Extension Advertisement
-
-Following SEP-2133, clients and servers advertise support for this extension via the `extensions` field in capabilities:
-
-**Client advertising support**:
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "initialize",
-  "params": {
-    "protocolVersion": "2025-11-25",
-    "capabilities": {
-      "extensions": {
-        "io.modelcontextprotocol/content-negotiation": {}
-      }
-    }
-  }
-}
-```
-
-**Server advertising support**:
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "protocolVersion": "2025-11-25",
-    "capabilities": {
-      "extensions": {
-        "io.modelcontextprotocol/content-negotiation": {}
-      }
-    }
-  }
-}
-```
-
-Clients and servers MAY declare support in the `extensions` field, but the feature tags are still declared via the `contentNegotiation` capability as described above. Both mechanisms can coexist.
 
 ### Feature Tag Registry (Initial v1.0)
 
@@ -526,8 +486,8 @@ Server logic: **If tag is present and does NOT equal value, apply behavior**
 **Requirement 1: MUST Support Backward Compatibility**
 Servers without the `contentNegotiation` capability (or clients without declaring it) behave identically to today's protocol. This extension adds no mandatory requirements to existing implementations.
 
-**Requirement 2: SHOULD Declare Declared Capabilities in Features**
-If a client declares `sampling: {}` in capabilities, it SHOULD also declare `"sampling"` in `contentNegotiation.features`. This is a SHOULD-level recommendation (not enforced), but clarifies intent: one field signals protocol availability, the other signals how to use it.
+**Requirement 2: SHOULD Mirror Declared Capabilities in Features**
+If a client declares `sampling: {}` in capabilities, it SHOULD also include `"sampling"` in the extension's `features` array. This clarifies intent: one field signals protocol availability, the other signals how to use it. This is a SHOULD-level recommendation (not enforced).
 
 **Requirement 3: MUST NOT Use Features as Authentication**
 Feature tags are **for content shaping only**. They MUST NOT be used to:
@@ -564,18 +524,20 @@ If a client declares unsupported features, servers MUST respond with default con
       "elicitation": { "form": {}, "url": {} },
       "roots": { "listChanged": true },
       "tasks": {},
-      "contentNegotiation": {
-        "version": "1.0",
-        "features": [
-          "agent",
-          "mcp-capable",
-          "sampling",
-          "elicitation",
-          "roots",
-          "tasks",
-          "verbosity=compact",
-          "format=json"
-        ]
+      "extensions": {
+        "io.modelcontextprotocol/content-negotiation": {
+          "version": "1.0",
+          "features": [
+            "agent",
+            "mcp-capable",
+            "sampling",
+            "elicitation",
+            "roots",
+            "tasks",
+            "verbosity=compact",
+            "format=json"
+          ]
+        }
       }
     },
     "clientInfo": {
@@ -586,7 +548,7 @@ If a client declares unsupported features, servers MUST respond with default con
 }
 ```
 
-**Server Response** (negotiating server):
+**Server Response** (supporting this extension):
 ```json
 {
   "jsonrpc": "2.0",
@@ -599,13 +561,15 @@ If a client declares unsupported features, servers MUST respond with default con
       "resources": { "subscribe": true, "listChanged": true },
       "tools": { "listChanged": true },
       "tasks": { "list": {}, "cancel": {} },
-      "contentNegotiation": { "honored": true }
+      "extensions": {
+        "io.modelcontextprotocol/content-negotiation": {}
+      }
     },
     "serverInfo": {
       "name": "Weather Service",
       "version": "2.0.0"
     },
-    "instructions": "Tool results will be JSON-formatted. Prompts include reasoning hints."
+    "instructions": "Content negotiation enabled. Tool results will be JSON-formatted; prompts include reasoning hints."
   }
 }
 ```
@@ -621,15 +585,17 @@ If a client declares unsupported features, servers MUST respond with default con
   "params": {
     "protocolVersion": "2025-11-25",
     "capabilities": {
-      "contentNegotiation": {
-        "version": "1.0",
-        "features": [
-          "human",
-          "!mcp-capable",
-          "interactive",
-          "verbosity=standard",
-          "format=markdown"
-        ]
+      "extensions": {
+        "io.modelcontextprotocol/content-negotiation": {
+          "version": "1.0",
+          "features": [
+            "human",
+            "!mcp-capable",
+            "interactive",
+            "verbosity=standard",
+            "format=markdown"
+          ]
+        }
       }
     },
     "clientInfo": {
@@ -652,20 +618,22 @@ If a client declares unsupported features, servers MUST respond with default con
       "prompts": { "listChanged": true },
       "resources": { "subscribe": true, "listChanged": true },
       "tools": { "listChanged": true },
-      "contentNegotiation": { "honored": true }
+      "extensions": {
+        "io.modelcontextprotocol/content-negotiation": {}
+      }
     },
     "serverInfo": {
       "name": "Weather Service",
       "version": "2.0.0"
     },
-    "instructions": "Tool results will be markdown-formatted with narrative explanations."
+    "instructions": "Content negotiation enabled. Tool results will be markdown-formatted with narrative explanations."
   }
 }
 ```
 
 #### Scenario 3: Legacy Client (No Content Negotiation)
 
-**Client Request** (old client, no contentNegotiation capability):
+**Client Request** (old client, no content negotiation extension):
 ```json
 {
   "jsonrpc": "2.0",
@@ -684,7 +652,7 @@ If a client declares unsupported features, servers MUST respond with default con
 }
 ```
 
-**Server Response** (negotiating server):
+**Server Response** (server with extension support):
 ```json
 {
   "jsonrpc": "2.0",
@@ -696,13 +664,15 @@ If a client declares unsupported features, servers MUST respond with default con
       "prompts": { "listChanged": true },
       "resources": { "subscribe": true, "listChanged": true },
       "tools": { "listChanged": true },
-      "contentNegotiation": { "honored": true }
+      "extensions": {
+        "io.modelcontextprotocol/content-negotiation": {}
+      }
     },
     "serverInfo": {
       "name": "Weather Service",
       "version": "2.0.0"
     },
-    "instructions": "Client did not declare content negotiation; using default format (markdown)."
+    "instructions": "Client does not support content negotiation extension; using default format."
   }
 }
 ```
@@ -972,15 +942,14 @@ SDKs are under no obligation to implement this extension or accept contributed i
 
 ### TypeScript Schema Changes
 
-Add new capability interfaces to `schema/draft/schema.ts`:
+Per SEP-2133, extensions are advertised via the `extensions` field in capabilities. This extension defines a settings object for use in that field:
 
 ```typescript
 /**
- * Client capability to declare content negotiation preferences.
- * Allows clients to signal their MCP capabilities and content format preferences,
- * enabling servers to tailor responses accordingly.
+ * Settings for the content-negotiation extension.
+ * Declared by clients in extensions["io.modelcontextprotocol/content-negotiation"]
  */
-export interface ClientContentNegotiationCapability {
+export interface ContentNegotiationSettings {
   /**
    * Version of the content negotiation protocol.
    * Enables future evolution while maintaining compatibility.
@@ -990,13 +959,12 @@ export interface ClientContentNegotiationCapability {
 
   /**
    * Feature tags declaring client capabilities and preferences.
+   * Only present in client request, not in server response.
    *
    * Tags can be:
    * - Presence: "agent", "sampling", "interactive" (tag is present)
    * - Negation: "!interactive", "!mcp-capable" (tag is absent)
    * - Equality: "format=json", "verbosity=compact" (tag has specific value)
-   *
-   * Server processes these tags to vary response content format.
    *
    * Standard tags:
    * - "agent" | "human": Client type
@@ -1009,50 +977,14 @@ export interface ClientContentNegotiationCapability {
    *
    * Servers SHOULD ignore unknown tags and log warnings for unsupported features.
    */
-  features: string[];
+  features?: string[];
 }
 
-/**
- * Server capability indicating support for content negotiation.
- * When declared, server commits to honoring client's negotiated features
- * in tool results, resources, and prompt templates.
- */
-export interface ServerContentNegotiationCapability {
-  /**
-   * Set to true to indicate server will vary response content based on
-   * client-declared negotiation features.
-   */
-  honored: true;
-}
-```
-
-### Extend ClientCapabilities
-
-```typescript
-export interface ClientCapabilities {
-  // ... existing capabilities ...
-
-  /**
-   * Support for content negotiation.
-   * Client declares this capability to signal preferred content format.
-   */
-  contentNegotiation?: ClientContentNegotiationCapability;
-}
-```
-
-### Extend ServerCapabilities
-
-```typescript
-export interface ServerCapabilities {
-  // ... existing capabilities ...
-
-  /**
-   * Server supports content negotiation.
-   * When declared, server will vary response content based on
-   * client's negotiated features.
-   */
-  contentNegotiation?: ServerContentNegotiationCapability;
-}
+// No changes to existing ClientCapabilities or ServerCapabilities
+// Extension support is advertised via the existing "extensions" field:
+//
+// Client: capabilities.extensions["io.modelcontextprotocol/content-negotiation"] = { version, features }
+// Server: capabilities.extensions["io.modelcontextprotocol/content-negotiation"] = {} (empty object)
 ```
 
 ### Helper: Parse and Match Features
@@ -1097,13 +1029,8 @@ function lackFeature(features: string[], feature: string): boolean {
 }
 
 // Usage:
-const clientFeatures = [
-  "agent",
-  "mcp-capable",
-  "sampling",
-  "format=json",
-  "verbosity=compact"
-];
+const serverCapabilities = clientCapabilities.extensions?.['io.modelcontextprotocol/content-negotiation'];
+const clientFeatures = serverCapabilities?.features || [];
 
 if (hasFeature(clientFeatures, 'agent')) {
   // Return JSON-formatted response
@@ -1125,9 +1052,13 @@ if (lackFeature(clientFeatures, 'interactive')) {
 ```typescript
 async function getWeatherToolResponse(
   location: string,
-  clientFeatures: string[]
+  clientCapabilities: ClientCapabilities
 ): Promise<ToolResultContent> {
   const weatherData = await fetchWeather(location);
+
+  // Extract features from extension settings
+  const extensionSettings = clientCapabilities.extensions?.['io.modelcontextprotocol/content-negotiation'];
+  const clientFeatures = extensionSettings?.features || [];
 
   const isAgent = hasFeature(clientFeatures, 'agent');
   const wantsJson = hasEqualityFeature(clientFeatures, 'format', 'json');
