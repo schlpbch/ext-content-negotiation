@@ -4,7 +4,9 @@
 - **Type**: Extensions Track
 - **Extension ID**: `io.modelcontextprotocol/content-negotiation`
 - **Created**: 2026-02-22
-- **Author(s)**: (Community Draft)
+- **Author(s)**: 
+   - Aaron Sempf (sempfa@amazon.com)
+   - Andreas Schlapach(andreas.schlapbach@sbb.ch)
 - **Sponsor**: (Seeking)
 - **PR**: (To be filled)
 - **Extension Repository**: (To be created at `https://github.com/modelcontextprotocol/ext-content-negotiation`)
