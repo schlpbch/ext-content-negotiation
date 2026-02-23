@@ -32,26 +32,41 @@ This leads to either:
 2. **Unreliable heuristics** (guessing based on clientInfo.name)
 3. **Bloated responses** (supporting all formats simultaneously)
 
-## Solution: Transparent Content Negotiation
+## Solution: Transparent Content Negotiation (Extension)
 
-Clients declare capabilities during `initialize`:
+Clients declare the extension and their capabilities during `initialize`:
 
 ```json
 {
-  "contentNegotiation": {
-    "version": "1.0",
-    "features": [
-      "agent",
-      "sampling",
-      "format=json",
-      "verbosity=compact"
-    ]
+  "capabilities": {
+    "extensions": {
+      "io.modelcontextprotocol/content-negotiation": {
+        "version": "1.0",
+        "features": [
+          "agent",
+          "sampling",
+          "format=json",
+          "verbosity=compact"
+        ]
+      }
+    }
   }
 }
 ```
 
-Servers respond with content optimized for those capabilities:
+Servers advertise support and respond with content optimized for those capabilities:
 
+```json
+{
+  "capabilities": {
+    "extensions": {
+      "io.modelcontextprotocol/content-negotiation": {}
+    }
+  }
+}
+```
+
+Tool response (JSON-formatted for agents):
 ```json
 {
   "structuredContent": {
@@ -148,8 +163,9 @@ Servers respond with content optimized for those capabilities:
 ### Server Side
 
 ```typescript
-// Parse client features at initialization
-const features = client.capabilities.contentNegotiation?.features || [];
+// Parse client features at initialization (from extension settings)
+const extensionSettings = client.capabilities.extensions?.["io.modelcontextprotocol/content-negotiation"];
+const features = extensionSettings?.features || [];
 
 // Check client type
 const isAgent = features.includes("agent");
@@ -161,23 +177,32 @@ if (isAgent && wantsJson) {
 } else {
   return { content: [{type: "text", text: "..."}] };  // Markdown
 }
+
+// Advertise extension support
+const serverCapabilities = {
+  extensions: {
+    "io.modelcontextprotocol/content-negotiation": {}  // Empty object = support
+  }
+};
 ```
 
 ### Client Side
 
 ```typescript
-// Declare capabilities at initialization
+// Declare extension support at initialization
 const capabilities = {
   sampling: {},
-  contentNegotiation: {
-    version: "1.0",
-    features: [
-      "agent",
-      "sampling",
-      "mcp-capable",
-      "format=json",
-      "verbosity=compact"
-    ]
+  extensions: {
+    "io.modelcontextprotocol/content-negotiation": {
+      version: "1.0",
+      features: [
+        "agent",
+        "sampling",
+        "mcp-capable",
+        "format=json",
+        "verbosity=compact"
+      ]
+    }
   }
 };
 ```
