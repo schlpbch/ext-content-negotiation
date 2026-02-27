@@ -1,5 +1,20 @@
 # Release Notes
 
+## v0.9.7 — Kotlin Reference Implementation
+**Date**: February 27, 2026 | **Status**: Under Community Review
+
+### Changes
+- **Kotlin reference implementation added**: New `KOTLIN_REFERENCE.md` covering
+  the official MCP Kotlin SDK (`kotlin-sdk`), with a `Features` data class,
+  `getFeatures(ClientCapabilities?)` using `kotlinx.serialization` JsonObject
+  traversal, and a full weather tool example using the `addTool` DSL
+- **README updated**: Kotlin reference linked throughout
+- **Spec updated**: `SDK Implementation Guidance` subsection updated from six to
+  seven ecosystem companion documents
+- **Version updated to v0.9.7** across spec and badge
+
+---
+
 ## v0.9.6 — Go and C# / .NET Reference Implementations
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
@@ -131,5 +146,6 @@ ext-content-negotiation/
 ├── RUST_REFERENCE.md           # Rust / rmcp reference implementation
 ├── GO_REFERENCE.md             # Go / go-sdk reference implementation
 ├── CSHARP_REFERENCE.md         # C# / .NET reference implementation
+├── KOTLIN_REFERENCE.md         # Kotlin / kotlin-sdk reference implementation
 └── RELEASE_NOTES.md            # This file
 ```
