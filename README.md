@@ -169,7 +169,7 @@ it.
    [Issues](https://github.com/schlpbch/agentic-content-negotiation/issues) or
    [MCP Community Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions)
 3. **Test** reference implementations:
-   [TypeScript](TYPESCRIPT_REFERENCE.md) · [Python/FastMCP](FASTMCP_REFERENCE.md) · [Java/Spring AI](SPRING_AI_REFERENCE.md)
+   [TypeScript](TYPESCRIPT_REFERENCE.md) · [Python/FastMCP](FASTMCP_REFERENCE.md) · [Java/Spring AI](SPRING_AI_REFERENCE.md) · [Rust/rmcp](RUST_REFERENCE.md)
 4. **Suggest** improvements to feature tags, semantics, or design
 
 ## Links
@@ -195,7 +195,8 @@ it.
 
 Reference implementations: [TYPESCRIPT_REFERENCE.md](TYPESCRIPT_REFERENCE.md) ·
 [FASTMCP_REFERENCE.md](FASTMCP_REFERENCE.md) ·
-[SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md)
+[SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md) ·
+[RUST_REFERENCE.md](RUST_REFERENCE.md)
 
 Supporting analysis: [RFC2295_ANALYSIS.md](RFC2295_ANALYSIS.md) ·
 [MCP_ANALYSIS.md](MCP_ANALYSIS.md) ·
