@@ -948,6 +948,50 @@ How does this SEP relate to RFC 2295's concepts?
 | Caching strategy (variant list freshness)                       | Not applicable to MCP                          | **Not applicable**                                  |
 | TCN response header                                             | No per-message headers in MCP                  | **Not applicable**                                  |
 
+### Prior Art: SEP-2053 Server Variants
+
+[SEP-2053](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/2053)
+(Sambhav Kothari, January 2026) addresses the same root problem — MCP servers
+cannot adapt to different client types — but from the opposite direction.
+Rather than clients declaring capabilities, servers advertise named
+configurations (`claude-optimized`, `compact`, `automation-agent`) and clients
+select among them per-request via `_meta`.
+
+**Key differences**:
+
+| Dimension | This extension | SEP-2053 |
+| --- | --- | --- |
+| Who drives selection | Client declares capabilities; server adapts | Server ranks variants; client picks |
+| What varies | Response content (format, verbosity, structure) | Tool/resource surface (which tools exist, their schemas) |
+| Negotiation scope | Session-scoped once at `initialize` | Per-request via `_meta` on every call |
+| Semantic grounding | Tags tied to MCP protocol capabilities | Open-ended key-value hint strings |
+| Per-request overhead | None | `_meta` on every request; variant-scoped cursors and subscriptions |
+
+**What SEP-2053 addresses that this extension does not**: Exposing entirely
+different tool catalogs to different agents (e.g., a `code-review` variant with
+PR tools vs. an `automation` variant with pipeline tools). This extension does
+not change which tools exist — only how their results are formatted.
+
+**What this extension addresses that SEP-2053 does not**: Precise,
+protocol-grounded semantics. Feature tags like `sampling`, `elicitation`, and
+`roots` correspond directly to MCP capabilities the client has declared. SEP-2053's
+hints (`modelFamily`, `useCase`, vendor keys) are open-ended strings requiring
+heuristic or LLM-based matching. Notably, both proposals independently arrived
+at the same vocabulary axes (`compact`/`standard`/`verbose` verbosity,
+`agent`/`interactive` audience) — confirming these are the right dimensions for
+client-server adaptation.
+
+**Security model**: This extension enforces that feature tags control *what is
+sent*, never *whether to send it* (no access control via tags). SEP-2053 uses
+variants for access gating (`"security-readonly"` variant, `accessLevel` hints),
+which can create authorization gaps if variant identity is not treated as a
+security boundary.
+
+**Complementarity**: The two proposals operate at different layers and are not
+mutually exclusive. A server could implement both — SEP-2053 variants to select
+*which tool surface* to expose, and this extension to shape *how results are
+formatted* within that surface.
+
 ## Backward Compatibility
 
 This extension is **fully backward compatible** with the core MCP protocol,
