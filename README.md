@@ -82,6 +82,9 @@ Full specification in
 - **Backward Compatibility** - No breaking changes, migration path
 - **Security Implications** - 5 risks analyzed with mitigations
 - **Reference Implementation** - TypeScript schemas, helper functions, examples
+  (see also [TYPESCRIPT_REFERENCE.md](TYPESCRIPT_REFERENCE.md),
+  [FASTMCP_REFERENCE.md](FASTMCP_REFERENCE.md), and
+  [SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md) for full worked examples)
 
 ## Feature Tags (v1.0 Registry)
 
@@ -164,7 +167,8 @@ it.
 2. **Feedback** via
    [Issues](https://github.com/schlpbch/agentic-content-negotiation/issues) or
    [MCP Community Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions)
-3. **Test** reference implementations with your server/client
+3. **Test** reference implementations:
+   [TypeScript](TYPESCRIPT_REFERENCE.md) · [Python/FastMCP](FASTMCP_REFERENCE.md) · [Java/Spring AI](SPRING_AI_REFERENCE.md)
 4. **Suggest** improvements to feature tags, semantics, or design
 
 ## Links
@@ -187,6 +191,10 @@ it.
 | Phase        | Community feedback and design refinement      |
 
 ---
+
+Reference implementations: [TYPESCRIPT_REFERENCE.md](TYPESCRIPT_REFERENCE.md) ·
+[FASTMCP_REFERENCE.md](FASTMCP_REFERENCE.md) ·
+[SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md)
 
 Supporting analysis: [RFC2295_ANALYSIS.md](RFC2295_ANALYSIS.md) ·
 [MCP_ANALYSIS.md](MCP_ANALYSIS.md) ·
