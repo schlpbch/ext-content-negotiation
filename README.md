@@ -5,53 +5,30 @@
 
 ## Overview
 
-We propose a **content negotiation mechanism** following
-[SEP-2133: Extensions](https://modelcontextprotocol.io/community/seps/2133-extensions)
-that allows MCP servers to adapt response formats based on client-declared
-capabilities. Inspired by
-[RFC 2295](https://www.rfc-editor.org/rfc/rfc2295.html) (Transparent Content
-Negotiation for HTTP), adapted for MCP's session-scoped architecture.
-
-Instead of serving one-size-fits-all responses, servers can:
-
-- Return **JSON for AI agents** that need structured data
-- Return **markdown for humans** who need narrative explanations
-- Return **reasoning hints for agents with sampling** vs simple results for
-  agents without
-- Gate **interactive dialogs** based on client's elicitation capability
-
-This diagram illustrates the process of content negotiation between a client and
-a server in the Model Context Protocol.
+A **content negotiation mechanism** for MCP following
+[SEP-2133: Extensions](https://modelcontextprotocol.io/community/seps/2133-extensions),
+allowing servers to adapt response formats based on client-declared capabilities.
+Inspired by [RFC 2295](https://www.rfc-editor.org/rfc/rfc2295.html), adapted for
+MCP's session-scoped architecture.
 
 ![Content Negotiation Diagram](content-negotiation-diagram.png)
 
-The client sends an initialization request specifying capabilities and preferred
-content formats such as JSON or markdown. The server evaluates these preferences
-and responds with content tailored to the client's needs, for example structured
-JSON for agents or markdown for humans. Arrows indicate the flow of requests and
-responses. The environment is a technical workflow with labeled steps and
-callouts. Text in the image includes labels like Client, Server, Initialize with
-capabilities, and Response with negotiated content. The tone is neutral and
-informative, focusing on technical clarity.
+Servers can return **JSON for agents**, **markdown for humans**, **reasoning hints**
+for agents with sampling, and gate **interactive dialogs** on elicitation capability.
 
 ## Problem Statement
 
-MCP servers currently cannot distinguish between:
+MCP servers cannot distinguish between AI agents (need structured data), humans (need
+prose), and agents with different capabilities (sampling, elicitation, roots, tasks).
+This forces developers toward:
 
-- AI agents that need structured data for processing
-- Humans that need narrative explanations
-- Agents with different protocol capabilities (sampling, elicitation, roots,
-  tasks)
-
-This leads to either:
-
-1. **Duplicate tools** (weather_json + weather_prose)
-2. **Unreliable heuristics** (guessing based on clientInfo.name)
+1. **Duplicate tools** (`weather_json` + `weather_prose`)
+2. **Unreliable heuristics** (guessing from `clientInfo.name`)
 3. **Bloated responses** (supporting all formats simultaneously)
 
-## Solution: Transparent Content Negotiation (Extension)
+## Solution
 
-Clients declare the extension and their capabilities during `initialize`:
+Clients declare the extension during `initialize`:
 
 ```json
 {
@@ -66,82 +43,30 @@ Clients declare the extension and their capabilities during `initialize`:
 }
 ```
 
-Servers advertise support and respond with content optimized for those
-capabilities:
-
-```json
-{
-  "capabilities": {
-    "extensions": {
-      "io.modelcontextprotocol/content-negotiation": {}
-    }
-  }
-}
-```
-
-Tool response (JSON-formatted for agents):
-
-```json
-{
-  "structuredContent": {
-    "type": "object",
-    "properties": {
-      "temperature_c": 8,
-      "humidity_percent": 72
-    }
-  }
-}
-```
+Servers advertise support with an empty object in their capabilities, then respond
+with content optimized for the declared features.
 
 ## Key Features
 
-- [x] **[RFC 2295](https://www.rfc-editor.org/rfc/rfc2295.html)-Inspired**:
-      Borrows concepts from HTTP transparent content negotiation, adapted to MCP
-- [x] **Session-Scoped**: Negotiation happens once at initialization, not
-      per-request
-- [x] **Capability-Driven**: Feature tags mirror client's actual MCP
-      capabilities
+- [x] **[RFC 2295](https://www.rfc-editor.org/rfc/rfc2295.html)-Inspired**: HTTP transparent content negotiation adapted to MCP
+- [x] **Session-Scoped**: Negotiation happens once at initialization, not per-request
+- [x] **Capability-Driven**: Feature tags mirror client's actual MCP capabilities
 - [x] **Flexible Predicates**: Supports presence, negation, and equality syntax
 - [x] **Fully Backward Compatible**: Zero breaking changes, optional feature
-- [x] **Secure**: Feature tags are for content shape only, never for auth/access
-      control
+- [x] **Secure**: Feature tags control content shape only, never auth/access
 
 ## Real-World Use Cases
 
-### 1. Journey Service
+| Use Case | Problem | Solution |
+| --- | --- | --- |
+| Journey Service | Agent needs structured data; human needs itinerary | One tool, negotiated format |
+| Geospatial/Mapping | Rich descriptions vs. coordinates/boundaries | GeoJSON for agents, markdown for humans |
+| Multi-Agent Orchestration | Different specialist agents, different capabilities | Server adapts per agent's init capabilities |
+| Weather/Environment | Same data, different consumers | Negotiated format eliminates duplication |
 
-- **Problem**: Agent needs structured connection data; human needs readable
-  itinerary
-- **Solution**: One tool, negotiated format (JSON for agent, markdown for human)
+## Main Document
 
-### 2. Geospatial/Mapping Service
-
-- **Problem**: Geographic data comes as rich descriptions; agents need
-  coordinates/boundaries
-- **Solution**: Server returns `application/json` (GeoJSON) for agents,
-  `text/markdown` for humans
-
-### 3. Multi-Agent Orchestration
-
-- **Problem**: Different specialist agents have different capabilities
-- **Solution**: Orchestrator reads each agent's capabilities at init, server
-  adapts responses
-
-### 4. Weather/Environment Services
-
-- **Problem**: Same data used by agents (need JSON) and humans (need prose)
-- **Solution**: Negotiated format eliminates duplication
-
-## Document Structure
-
-### Main Document:
-
-The idea and design of this extension are detailed in the main specification
-document
-
-- [ext-content-negotiation.md](ext-content-negotiation.md)
-
-covering:
+Full specification in **[ext-content-negotiation.md](ext-content-negotiation.md)** covering:
 
 - **Abstract** - Problem and solution overview
 - **Motivation** - 6 real-world use cases + 4 workaround analyses
@@ -150,211 +75,100 @@ covering:
 - **Backward Compatibility** - No breaking changes, migration path
 - **Security Implications** - 5 risks analyzed with mitigations
 - **Reference Implementation** - TypeScript schemas, helper functions, examples
-- **Additional Sections** - Performance, testing, open questions
 
 ## Feature Tags (v1.0 Registry)
 
-| Tag                                            | Meaning                   | Server Impact                           |
-| ---------------------------------------------- | ------------------------- | --------------------------------------- |
-| `agent` / `human`                              | Client type               | Content format preference               |
-| `mcp-capable`                                  | Understands MCP protocols | Can reference tool/resource names       |
-| `interactive` / `!interactive`                 | Can present UI            | Gate elicitation-style prompts          |
+| Tag | Meaning | Server Impact |
+| --- | --- | --- |
+| `agent` / `human` | Client type | Content format preference |
+| `mcp-capable` | Understands MCP protocols | Can reference tool/resource names |
+| `interactive` / `!interactive` | Can present UI | Gate elicitation-style prompts |
 | `sampling` / `elicitation` / `roots` / `tasks` | Declared MCP capabilities | Include reasoning hints, allow requests |
-| `verbosity=compact\|standard\|verbose`         | Response length           | Omit/expand explanations                |
-| `format=json\|text\|markdown`                  | Output format             | Use structuredContent vs prose          |
-| `x-*`                                          | Vendor-specific           | Custom implementations                  |
+| `verbosity=compact\|standard\|verbose` | Response length | Omit/expand explanations |
+| `format=json\|text\|markdown` | Output format | Use structuredContent vs prose |
+| `x-*` | Vendor-specific | Custom implementations |
 
-## How to Review
-
-### For MCP Maintainers & Contributors
-
-1. **Read the Abstract** (2 min) - Understand the problem and solution
-2. **Review Motivation** (10 min) - Validate the real-world use cases
-3. **Examine Specification** (15 min) - Ensure implementability
-4. **Check Rationale** (5 min) - Verify design decisions
-5. **Assess Security** (5 min) - Confirm risks are mitigated
-6. **Review Reference Implementation** (10 min) - Validate feasibility
-
-### Key Questions to Answer
-
-- ✓ Does this solve real problems?
-- ✓ Is the specification clear and implementable?
-- ✓ Are security implications properly addressed?
-- ✓ Is backward compatibility truly maintained?
-- ✓ Are there better alternatives?
-
-### Expected Timeline
-
-- **Draft Phase**: Community feedback and refinement (this stage)
-- **In-Review Phase**: Core Maintainer review + reference implementation
-- **Final Phase**: Approval and integration into MCP spec
-
-## Quick Start for Implementation
+## Quick Start
 
 ### Server Side
 
 ```typescript
-// Parse client features at initialization (from extension settings)
-const extensionSettings = client.capabilities.extensions?.["io.modelcontextprotocol/content-negotiation"];
-const features = extensionSettings?.features || [];
+const features = client.capabilities.extensions?.[
+  "io.modelcontextprotocol/content-negotiation"
+]?.features ?? [];
 
-// Check client type
-const isAgent = features.includes("agent");
-const wantsJson = features.includes("format=json");
-
-// Vary tool responses
-if (isAgent && wantsJson) {
-  return { structuredContent: {...} };  // JSON
+if (features.includes("agent") && features.includes("format=json")) {
+  return { structuredContent: { temperature_c: 8, humidity_percent: 72 } };
 } else {
-  return { content: [{type: "text", text: "..."}] };  // Markdown
+  return { content: [{ type: "text", text: "It's 8°C with 72% humidity." }] };
 }
 
-// Advertise extension support
+// Advertise support
 const serverCapabilities = {
-  extensions: {
-    "io.modelcontextprotocol/content-negotiation": {}  // Empty object = support
-  }
+  extensions: { "io.modelcontextprotocol/content-negotiation": {} }
 };
 ```
 
 ### Client Side
 
 ```typescript
-// Declare extension support at initialization
 const capabilities = {
   sampling: {},
   extensions: {
     'io.modelcontextprotocol/content-negotiation': {
       version: '1.0',
-      features: [
-        'agent',
-        'sampling',
-        'mcp-capable',
-        'format=json',
-        'verbosity=compact',
-      ],
+      features: ['agent', 'sampling', 'mcp-capable', 'format=json', 'verbosity=compact'],
     },
   },
 };
 ```
 
-## Security & Privacy
+## Security
 
-### What Features Are NOT Used For
+Feature tags optimize **what** the server sends, not **whether** it should send it.
 
-- ❌ Authentication (use credentials instead)
-- ❌ Authorization (use access control lists)
-- ❌ Trust decisions (use signatures/verification)
-- ❌ Rate limiting (use auth tokens)
+| Not for | Use instead |
+| --- | --- |
+| Authentication | Credentials |
+| Authorization | Access control lists |
+| Trust decisions | Signatures/verification |
+| Rate limiting | Auth tokens |
 
-### What Features ARE Used For
+## How to Review
 
-- ✅ Content format selection (JSON vs markdown)
-- ✅ Response length (verbosity)
-- ✅ Response hints (reasoning steps)
-
-**Principle**: Feature tags optimize _what the server sends_, not _whether the
-server should send it_.
-
-## Examples Included
-
-### Tool Response Variants
-
-- Agent requesting JSON → `{ structuredContent: {...} }`
-- Agent with sampling → `{ structuredContent: { hints: [...] } }`
-- Agent without interactive → `{ structuredContent: {...} }` (no dialogs)
-- Human requesting markdown → `{ content: [{type: "text", text: "..."}] }`
-
-### Initialize Scenarios
-
-- **Scenario 1**: AI agent with full capabilities
-- **Scenario 2**: Human user in chat interface
-- **Scenario 3**: Legacy client (no negotiation)
-
-### RFC 2295 Mapping
-
-13-row table showing:
-
-- What concepts were **adopted** from RFC 2295
-- What were **adapted** for MCP
-- What were **rejected** as unnecessary
-- What was **deferred** to v1.1+
+1. **Abstract** (2 min) - Problem and solution
+2. **Motivation** (10 min) - Validate use cases
+3. **Specification** (15 min) - Ensure implementability
+4. **Rationale** (5 min) - Design decisions
+5. **Security** (5 min) - Risk mitigations
+6. **Reference Implementation** (10 min) - Validate feasibility
 
 ## Contributing
 
-We welcome community feedback on this extension proposal:
-
-1. **Review** the specification in `SEP-DRAFT-agent-content-negotiation.md`
-2. **Provide feedback** via:
-   - This repository's
-     [Issues](https://github.com/schlpbch/agentic-content-negotiation/issues)
-   - [MCP Community Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions)
-   - Working groups (if established)
-3. **Test** reference implementations with your server/client code
-4. **Suggest** improvements or refinements to feature tags, semantics, or design
-
-### Next Steps for Contributors
-
-- **Read and review** `SEP-DRAFT-agent-content-negotiation.md`
-- **Implement** reference support in your SDK or server
-- **Report issues** and learnings back to this repository
-- **Advocate** for the extension if you find it valuable for your use cases
-
-Community input will shape the final design and determine whether this extension
-graduates to official MCP status.
+1. **Review** [ext-content-negotiation.md](ext-content-negotiation.md)
+2. **Feedback** via [Issues](https://github.com/schlpbch/agentic-content-negotiation/issues) or [MCP Community Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions)
+3. **Test** reference implementations with your server/client
+4. **Suggest** improvements to feature tags, semantics, or design
 
 ## Links
 
-### MCP Resources
-
 - **MCP Specification**: https://modelcontextprotocol.io/specification
-- **SEP-2133: Extensions Framework**:
-  https://modelcontextprotocol.io/community/seps/2133-extensions
-- **SEP Process**: https://modelcontextprotocol.io/community/sep-guidelines
-- **MCP Community**:
-  https://github.com/modelcontextprotocol/modelcontextprotocol
-
-### Technical References
-
-- **RFC 2295**: https://www.rfc-editor.org/rfc/rfc2295.html (Transparent Content
-  Negotiation for HTTP)
-- **This Repository**: https://github.com/schlpbch/agentic-content-negotiation
-- **Extension Specification**: `SEP-DRAFT-agent-content-negotiation.md` (this
-  repository)
-
-## About This Extension
-
-- **Extension ID**: `io.modelcontextprotocol/content-negotiation`
-- **Framework**: Proposed under
-  [SEP-2133: Extensions](https://modelcontextprotocol.io/community/seps/2133-extensions)
-- **Target Repository**:
-  `https://github.com/modelcontextprotocol/ext-content-negotiation` (upon
-  approval)
+- **SEP-2133: Extensions**: https://modelcontextprotocol.io/community/seps/2133-extensions
+- **RFC 2295**: https://www.rfc-editor.org/rfc/rfc2295.html
+- **MCP Community**: https://github.com/modelcontextprotocol/modelcontextprotocol
 
 ## Status
 
-- **Status**: Draft
-- **Type**: Extensions Track
-- **Created**: February 22, 2026
-- **Current Phase**: Community feedback and design refinement
+| Field | Value |
+| --- | --- |
+| Extension ID | `io.modelcontextprotocol/content-negotiation` |
+| Status | Draft |
+| Type | Extensions Track |
+| Created | February 22, 2026 |
+| Phase | Community feedback and design refinement |
 
 ---
 
-## Related Analysis Documents
+Supporting analysis: [RFC2295_ANALYSIS.md](RFC2295_ANALYSIS.md) · [MCP_ANALYSIS.md](MCP_ANALYSIS.md) · [MCP_PROPOSAL_GUIDE.md](MCP_PROPOSAL_GUIDE.md)
 
-This project includes supporting analysis:
-
-- **RFC2295_ANALYSIS.md** - Deep dive into RFC 2295 concepts
-- **MCP_ANALYSIS.md** - Current MCP architecture and capability model
-- **MCP_PROPOSAL_GUIDE.md** - MCP SEP process and requirements
-
-## License
-
-This proposal is part of the MCP community process and follows MCP's licensing
-model.
-
----
-
-**For questions or feedback**: Open an issue or discussion in this repository.
-
-**To sponsor this SEP**: Contact the MCP maintainers.
+This proposal follows MCP's licensing model. For questions, open an issue or discussion.
