@@ -8,6 +8,7 @@
 - **CLAUDE.md added**: Claude Code guidance documenting file architecture, core concepts, and working conventions
 - **Version badge updated** to v0.9.2 with corrected repository URL
 - **Spec header updated**: Added `Version: v0.9.2` field to `ext-content-negotiation.md`
+- **Tag & release target updated**: Tag `v0.9.2` moved to latest commit; release target set to `master`
 
 ---
 
