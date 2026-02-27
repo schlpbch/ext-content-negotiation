@@ -1,21 +1,6 @@
 # Release Notes
 
-## v0.9.7 — Kotlin Reference Implementation
-**Date**: February 27, 2026 | **Status**: Under Community Review
-
-### Changes
-- **Kotlin reference implementation added**: New `KOTLIN_REFERENCE.md` covering
-  the official MCP Kotlin SDK (`kotlin-sdk`), with a `Features` data class,
-  `getFeatures(ClientCapabilities?)` using `kotlinx.serialization` JsonObject
-  traversal, and a full weather tool example using the `addTool` DSL
-- **README updated**: Kotlin reference linked throughout
-- **Spec updated**: `SDK Implementation Guidance` subsection updated from six to
-  seven ecosystem companion documents
-- **Version updated to v0.9.7** across spec and badge
-
----
-
-## v0.9.6 — Go and C# / .NET Reference Implementations
+## v0.9.6 — Go, C# / .NET, and Kotlin Reference Implementations
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
 ### Changes
@@ -26,8 +11,12 @@
   official MCP .NET SDK (`ModelContextProtocol` v1.0), with a `Features` record,
   `ContentNegotiation.ParseFeatures()`, a `ContentNegotiationState` singleton for
   session-scoped capability access, and a full weather tool example
-- **README updated**: Go and C# references linked throughout
-- **Spec updated**: `SDK Implementation Guidance` subsection now lists six
+- **Kotlin reference implementation added**: New `KOTLIN_REFERENCE.md` covering
+  the official MCP Kotlin SDK (`kotlin-sdk`), with a `Features` data class,
+  `getFeatures(ClientCapabilities?)` using `kotlinx.serialization` JsonObject
+  traversal, and a full weather tool example using the `addTool` DSL
+- **README updated**: Go, C#, and Kotlin references linked throughout
+- **Spec updated**: `SDK Implementation Guidance` subsection now lists seven
   ecosystem companion documents
 - **Version updated to v0.9.6** across spec and badge
 
