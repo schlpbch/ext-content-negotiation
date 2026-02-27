@@ -1,5 +1,20 @@
 # Release Notes
 
+## v0.9.6 — Go Reference Implementation
+**Date**: February 27, 2026 | **Status**: Under Community Review
+
+### Changes
+- **Go reference implementation added**: New `GO_REFERENCE.md` covering the
+  official MCP Go SDK (`go-sdk`) with `GetFeatures(*mcp.CallToolRequest)` helper,
+  `Features` struct, and a full weather tool example
+- **README updated**: Go reference linked in Main Document section, Contributing
+  section, and footer
+- **Spec updated**: `SDK Implementation Guidance` subsection updated from four to
+  five ecosystem companion documents
+- **Version updated to v0.9.6** across spec and badge
+
+---
+
 ## v0.9.5 — Java / Spring AI 2.0 Reference Implementation
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
@@ -110,5 +125,7 @@ ext-content-negotiation/
 ├── TYPESCRIPT_REFERENCE.md     # TypeScript / MCP SDK reference implementation
 ├── FASTMCP_REFERENCE.md        # Python / FastMCP reference implementation
 ├── SPRING_AI_REFERENCE.md      # Java / Spring AI 2.0 reference implementation
+├── RUST_REFERENCE.md           # Rust / rmcp reference implementation
+├── GO_REFERENCE.md             # Go / go-sdk reference implementation
 └── RELEASE_NOTES.md            # This file
 ```

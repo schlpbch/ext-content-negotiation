@@ -1,5 +1,5 @@
 [![Status: Draft](https://img.shields.io/badge/Status-Draft-yellow?style=flat-square)](#status)
-[![Version: v0.9.5](https://img.shields.io/badge/Version-v0.9.5-blue?style=flat-square)](https://github.com/schlpbch/ext-content-negotiation/releases)
+[![Version: v0.9.6](https://img.shields.io/badge/Version-v0.9.6-blue?style=flat-square)](https://github.com/schlpbch/ext-content-negotiation/releases)
 [![Type: Extensions Track](https://img.shields.io/badge/Type-Extensions%20Track-purple?style=flat-square)](#status)
 [![Extension ID: io.modelcontextprotocol/content-negotiation](https://img.shields.io/badge/Extension-io.modelcontextprotocol/content--negotiation-brightblue?style=flat-square)](#about-this-extension)
 
@@ -84,8 +84,9 @@ Full specification in
 - **Reference Implementation** - TypeScript schemas, helper functions, examples
   (see also [TYPESCRIPT_REFERENCE.md](TYPESCRIPT_REFERENCE.md),
   [FASTMCP_REFERENCE.md](FASTMCP_REFERENCE.md),
-  [SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md), and
-  [RUST_REFERENCE.md](RUST_REFERENCE.md) for full worked examples)
+  [SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md),
+  [RUST_REFERENCE.md](RUST_REFERENCE.md), and
+  [GO_REFERENCE.md](GO_REFERENCE.md) for full worked examples)
 
 ## Feature Tags (v1.0 Registry)
 
@@ -169,7 +170,7 @@ it.
    [Issues](https://github.com/schlpbch/agentic-content-negotiation/issues) or
    [MCP Community Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions)
 3. **Test** reference implementations:
-   [TypeScript](TYPESCRIPT_REFERENCE.md) · [Python/FastMCP](FASTMCP_REFERENCE.md) · [Java/Spring AI](SPRING_AI_REFERENCE.md) · [Rust/rmcp](RUST_REFERENCE.md)
+   [TypeScript](TYPESCRIPT_REFERENCE.md) · [Python/FastMCP](FASTMCP_REFERENCE.md) · [Java/Spring AI](SPRING_AI_REFERENCE.md) · [Rust/rmcp](RUST_REFERENCE.md) · [Go](GO_REFERENCE.md)
 4. **Suggest** improvements to feature tags, semantics, or design
 
 ## Links
@@ -196,7 +197,8 @@ it.
 Reference implementations: [TYPESCRIPT_REFERENCE.md](TYPESCRIPT_REFERENCE.md) ·
 [FASTMCP_REFERENCE.md](FASTMCP_REFERENCE.md) ·
 [SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md) ·
-[RUST_REFERENCE.md](RUST_REFERENCE.md)
+[RUST_REFERENCE.md](RUST_REFERENCE.md) ·
+[GO_REFERENCE.md](GO_REFERENCE.md)
 
 Supporting analysis: [RFC2295_ANALYSIS.md](RFC2295_ANALYSIS.md) ·
 [MCP_ANALYSIS.md](MCP_ANALYSIS.md) ·
