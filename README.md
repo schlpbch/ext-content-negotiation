@@ -134,9 +134,14 @@ Tool response (JSON-formatted for agents):
 
 ## Document Structure
 
-### Main Document: `SEP-DRAFT-agent-content-negotiation.md`
+### Main Document:
 
-**1,210 lines** covering:
+The idea and design of this extension are detailed in the main specification
+document
+
+- [ext-content-negotiation.md](ext-content-negotiation.md)
+
+covering:
 
 - **Abstract** - Problem and solution overview
 - **Motivation** - 6 real-world use cases + 4 workaround analyses
