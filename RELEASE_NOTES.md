@@ -1,11 +1,15 @@
 # Release Notes
 
-## v0.9.3 — SEP-2053 Comparison Abstract
+## v0.9.3 — SEP-2290 Assigned, SEP-2053 Comparison Integration
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
 ### Changes
-- **Abstract added to SEP-2053 comparison**: `SEP2053_COMPARISON.md` now opens with a concise abstract summarising the shared motivation, the key design divergence, and the complementarity of the two proposals
-- **Spec header updated**: `Version` field in `ext-content-negotiation.md` bumped to `v0.9.3`
+- **SEP number assigned**: Spec header updated from `SEP-XXXX` to `SEP-2290`
+- **SEP-2053 Comparison fully integrated**:
+  - Added reference in spec Rationale section linking to detailed `SEP2053_COMPARISON.md`
+  - README Main Document section now mentions SEP-2053 comparison in Rationale description
+  - Added `SEP2053_COMPARISON.md` to supporting analysis links
+- **Version updated to v0.9.3** across spec and badge
 
 ---
 
