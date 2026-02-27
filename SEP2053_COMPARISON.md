@@ -1,6 +1,6 @@
-# Comparison: Content Negotiation vs. SEP-2053 Server Variants
+# Comparison: SEP-2090 Content Negotiation vs. SEP-2053 Server Variants
 
-## Abstract
+## Analysis
 
 Both the Content Negotiation extension (`io.modelcontextprotocol/content-negotiation`) and SEP-2053 (Server Variants) address the same root problem: MCP servers cannot adapt to heterogeneous client types and are forced to return one-size-fits-all responses. Despite sharing this motivation — and arriving independently at overlapping vocabulary (`compact`/`verbose`, `interactive`/`autonomous-agent`) — the two proposals operate at different layers and make fundamentally different design choices.
 
