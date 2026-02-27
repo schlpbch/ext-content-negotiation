@@ -1,7 +1,7 @@
 # SEP-2290: Content Negotiation Extension
 
 - **Status**: Draft
-- **Version**: v0.9.3
+- **Version**: v0.9.4
 - **Type**: Extensions Track
 - **Extension ID**: `io.modelcontextprotocol/content-negotiation`
 - **Created**: 2026-02-22

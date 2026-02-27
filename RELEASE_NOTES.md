@@ -1,5 +1,15 @@
 # Release Notes
 
+## v0.9.4 — PR Link Added
+**Date**: February 27, 2026 | **Status**: Under Community Review
+
+### Changes
+- **PR link added**: Spec header now references the official community PR at
+  [modelcontextprotocol/modelcontextprotocol#2317](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/2317)
+- **Version updated to v0.9.4** across spec and badge
+
+---
+
 ## v0.9.3 — SEP-2290 Assigned, SEP-2053 Comparison Integration
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
