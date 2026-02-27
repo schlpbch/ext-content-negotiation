@@ -1,5 +1,13 @@
 # Release Notes
 
+## v0.9.3 — SEP-2053 Comparison Abstract
+**Date**: February 27, 2026 | **Status**: Under Community Review
+
+### Changes
+- **Abstract added to SEP-2053 comparison**: `SEP2053_COMPARISON.md` now opens with a concise abstract summarising the shared motivation, the key design divergence, and the complementarity of the two proposals
+
+---
+
 ## v0.9.2 — Documentation & Repo Guidance
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
@@ -68,5 +76,6 @@ ext-content-negotiation/
 ├── MCP_ANALYSIS.md             # MCP architecture analysis
 ├── MCP_PROPOSAL_GUIDE.md       # Proposal process guide
 ├── CLAUDE.md                   # Claude Code guidance
+├── SEP2053_COMPARISON.md       # Comparison with SEP-2053 Server Variants
 └── RELEASE_NOTES.md            # This file
 ```
