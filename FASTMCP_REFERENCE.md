@@ -21,22 +21,21 @@ The implementation has three layers:
 # content_negotiation.py
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from typing import Any, Literal
 
 from fastmcp.server import Context
 from fastmcp.server.middleware import CallNext, Middleware, MiddlewareContext
 import mcp.types as mt
+from pydantic import BaseModel, Field
 
 EXTENSION_ID = "io.modelcontextprotocol/content-negotiation"
 _STATE_KEY = "__content_negotiation_features__"
 
 
-@dataclass
-class Features:
+class Features(BaseModel):
     """Negotiated content preferences for the current session."""
 
-    tags: list[str] = field(default_factory=list)
+    tags: list[str] = Field(default_factory=list)
 
     # --- Convenience properties ---
 
