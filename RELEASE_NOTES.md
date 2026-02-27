@@ -1,32 +1,19 @@
 # Release Notes
 
-## v0.9.7 — C# / .NET Reference Implementation
-**Date**: February 27, 2026 | **Status**: Under Community Review
-
-### Changes
-- **C# reference implementation added**: New `CSHARP_REFERENCE.md` covering the
-  official MCP .NET SDK (`ModelContextProtocol` v1.0), with a `Features` record,
-  `ContentNegotiation.ParseFeatures()`, a `ContentNegotiationState` singleton for
-  session-scoped capability access, and a full weather tool example
-- **README updated**: C# reference linked in Main Document section, Contributing
-  section, and footer
-- **Spec updated**: `SDK Implementation Guidance` subsection updated from five to
-  six ecosystem companion documents
-- **Version updated to v0.9.7** across spec and badge
-
----
-
-## v0.9.6 — Go Reference Implementation
+## v0.9.6 — Go and C# / .NET Reference Implementations
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
 ### Changes
 - **Go reference implementation added**: New `GO_REFERENCE.md` covering the
   official MCP Go SDK (`go-sdk`) with `GetFeatures(*mcp.CallToolRequest)` helper,
   `Features` struct, and a full weather tool example
-- **README updated**: Go reference linked in Main Document section, Contributing
-  section, and footer
-- **Spec updated**: `SDK Implementation Guidance` subsection updated from four to
-  five ecosystem companion documents
+- **C# reference implementation added**: New `CSHARP_REFERENCE.md` covering the
+  official MCP .NET SDK (`ModelContextProtocol` v1.0), with a `Features` record,
+  `ContentNegotiation.ParseFeatures()`, a `ContentNegotiationState` singleton for
+  session-scoped capability access, and a full weather tool example
+- **README updated**: Go and C# references linked throughout
+- **Spec updated**: `SDK Implementation Guidance` subsection now lists six
+  ecosystem companion documents
 - **Version updated to v0.9.6** across spec and badge
 
 ---

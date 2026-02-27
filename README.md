@@ -1,5 +1,5 @@
 [![Status: Draft](https://img.shields.io/badge/Status-Draft-yellow?style=flat-square)](#status)
-[![Version: v0.9.7](https://img.shields.io/badge/Version-v0.9.7-blue?style=flat-square)](https://github.com/schlpbch/ext-content-negotiation/releases)
+[![Version: v0.9.6](https://img.shields.io/badge/Version-v0.9.6-blue?style=flat-square)](https://github.com/schlpbch/ext-content-negotiation/releases)
 [![Type: Extensions Track](https://img.shields.io/badge/Type-Extensions%20Track-purple?style=flat-square)](#status)
 [![Extension ID: io.modelcontextprotocol/content-negotiation](https://img.shields.io/badge/Extension-io.modelcontextprotocol/content--negotiation-brightblue?style=flat-square)](#about-this-extension)
 
