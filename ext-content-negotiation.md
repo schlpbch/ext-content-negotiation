@@ -1,7 +1,7 @@
 # SEP-2290: Content Negotiation Extension
 
 - **Status**: Draft
-- **Version**: v0.9.6
+- **Version**: v0.9.7
 - **Type**: Extensions Track
 - **Extension ID**: `io.modelcontextprotocol/content-negotiation`
 - **Created**: 2026-02-22
@@ -1153,12 +1153,13 @@ SDKs implementing this extension SHOULD:
 SDKs are under no obligation to implement this extension or accept contributed
 implementations. Extension support is not required for protocol conformance.
 
-Full worked examples for five ecosystems are provided as companion documents:
+Full worked examples for six ecosystems are provided as companion documents:
 [TYPESCRIPT_REFERENCE.md](TYPESCRIPT_REFERENCE.md) (TypeScript / MCP SDK),
 [FASTMCP_REFERENCE.md](FASTMCP_REFERENCE.md) (Python / FastMCP),
 [SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md) (Java / Spring AI 2.0),
-[RUST_REFERENCE.md](RUST_REFERENCE.md) (Rust / rmcp), and
-[GO_REFERENCE.md](GO_REFERENCE.md) (Go / go-sdk).
+[RUST_REFERENCE.md](RUST_REFERENCE.md) (Rust / rmcp),
+[GO_REFERENCE.md](GO_REFERENCE.md) (Go / go-sdk), and
+[CSHARP_REFERENCE.md](CSHARP_REFERENCE.md) (C# / .NET).
 
 ### TypeScript Schema Changes
 

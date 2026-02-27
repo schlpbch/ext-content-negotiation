@@ -1,5 +1,21 @@
 # Release Notes
 
+## v0.9.7 — C# / .NET Reference Implementation
+**Date**: February 27, 2026 | **Status**: Under Community Review
+
+### Changes
+- **C# reference implementation added**: New `CSHARP_REFERENCE.md` covering the
+  official MCP .NET SDK (`ModelContextProtocol` v1.0), with a `Features` record,
+  `ContentNegotiation.ParseFeatures()`, a `ContentNegotiationState` singleton for
+  session-scoped capability access, and a full weather tool example
+- **README updated**: C# reference linked in Main Document section, Contributing
+  section, and footer
+- **Spec updated**: `SDK Implementation Guidance` subsection updated from five to
+  six ecosystem companion documents
+- **Version updated to v0.9.7** across spec and badge
+
+---
+
 ## v0.9.6 — Go Reference Implementation
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
@@ -127,5 +143,6 @@ ext-content-negotiation/
 ├── SPRING_AI_REFERENCE.md      # Java / Spring AI 2.0 reference implementation
 ├── RUST_REFERENCE.md           # Rust / rmcp reference implementation
 ├── GO_REFERENCE.md             # Go / go-sdk reference implementation
+├── CSHARP_REFERENCE.md         # C# / .NET reference implementation
 └── RELEASE_NOTES.md            # This file
 ```
