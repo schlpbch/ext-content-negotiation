@@ -1,5 +1,20 @@
 # Release Notes
 
+## v0.9.5 — Java / Spring AI 2.0 Reference Implementation
+**Date**: February 27, 2026 | **Status**: Under Community Review
+
+### Changes
+- **Java reference implementation added**: New `SPRING_AI_REFERENCE.md` covering
+  Spring AI 2.0 with `McpSyncServerExchange` injection, `Features` record, and
+  `ContentNegotiation.getFeatures()` static helper
+- **README updated**: Spring AI reference linked in Main Document section,
+  Contributing section, and footer
+- **Spec updated**: `SDK Implementation Guidance` subsection now references all
+  three companion documents (TypeScript, Python/FastMCP, Java/Spring AI)
+- **Version updated to v0.9.5** across spec and badge
+
+---
+
 ## v0.9.4 — PR Link Added
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
@@ -92,5 +107,8 @@ ext-content-negotiation/
 ├── MCP_PROPOSAL_GUIDE.md       # Proposal process guide
 ├── CLAUDE.md                   # Claude Code guidance
 ├── SEP2053_COMPARISON.md       # Comparison with SEP-2053 Server Variants
+├── TYPESCRIPT_REFERENCE.md     # TypeScript / MCP SDK reference implementation
+├── FASTMCP_REFERENCE.md        # Python / FastMCP reference implementation
+├── SPRING_AI_REFERENCE.md      # Java / Spring AI 2.0 reference implementation
 └── RELEASE_NOTES.md            # This file
 ```
