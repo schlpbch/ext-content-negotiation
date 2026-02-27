@@ -1,5 +1,15 @@
 # Comparison: Content Negotiation vs. SEP-2053 Server Variants
 
+## Abstract
+
+Both the Content Negotiation extension (`io.modelcontextprotocol/content-negotiation`) and SEP-2053 (Server Variants) address the same root problem: MCP servers cannot adapt to heterogeneous client types and are forced to return one-size-fits-all responses. Despite sharing this motivation — and arriving independently at overlapping vocabulary (`compact`/`verbose`, `interactive`/`autonomous-agent`) — the two proposals operate at different layers and make fundamentally different design choices.
+
+Content Negotiation is a *session-scoped, client-driven* mechanism: clients declare structured feature tags once at `initialize`, and servers adapt response *content* (format, verbosity, structure) accordingly, with no per-request overhead and a hard constraint that tags never gate access. SEP-2053 is a *per-request, server-advertised* mechanism: servers publish named variants, clients select one per call via `_meta`, and servers may expose entirely different *tool surfaces* per variant.
+
+The proposals are complementary rather than competing: SEP-2053 decides *which tools exist* for a given client profile; Content Negotiation decides *how results are formatted* within that surface. Implementing both allows a server to combine tool-catalog selection with fine-grained content adaptation.
+
+---
+
 This document compares this extension proposal with
 [SEP-2053: Server Variants](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/2053),
 a related proposal by Sambhav Kothari (January 2026) that addresses the same
