@@ -1153,6 +1153,11 @@ SDKs implementing this extension SHOULD:
 SDKs are under no obligation to implement this extension or accept contributed
 implementations. Extension support is not required for protocol conformance.
 
+Full worked examples for three ecosystems are provided as companion documents:
+[TYPESCRIPT_REFERENCE.md](TYPESCRIPT_REFERENCE.md) (TypeScript / MCP SDK),
+[FASTMCP_REFERENCE.md](FASTMCP_REFERENCE.md) (Python / FastMCP), and
+[SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md) (Java / Spring AI 2.0).
+
 ### TypeScript Schema Changes
 
 Per SEP-2133, extensions are advertised via the `extensions` field in
