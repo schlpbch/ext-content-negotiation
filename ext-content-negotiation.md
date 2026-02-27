@@ -1153,14 +1153,15 @@ SDKs implementing this extension SHOULD:
 SDKs are under no obligation to implement this extension or accept contributed
 implementations. Extension support is not required for protocol conformance.
 
-Full worked examples for seven ecosystems are provided as companion documents:
+Full worked examples for eight ecosystems are provided as companion documents:
 [TYPESCRIPT_REFERENCE.md](TYPESCRIPT_REFERENCE.md) (TypeScript / MCP SDK),
 [FASTMCP_REFERENCE.md](FASTMCP_REFERENCE.md) (Python / FastMCP),
 [SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md) (Java / Spring AI 2.0),
 [RUST_REFERENCE.md](RUST_REFERENCE.md) (Rust / rmcp),
 [GO_REFERENCE.md](GO_REFERENCE.md) (Go / go-sdk),
-[CSHARP_REFERENCE.md](CSHARP_REFERENCE.md) (C# / .NET), and
-[KOTLIN_REFERENCE.md](KOTLIN_REFERENCE.md) (Kotlin / kotlin-sdk).
+[CSHARP_REFERENCE.md](CSHARP_REFERENCE.md) (C# / .NET),
+[KOTLIN_REFERENCE.md](KOTLIN_REFERENCE.md) (Kotlin / kotlin-sdk), and
+[SWIFT_REFERENCE.md](SWIFT_REFERENCE.md) (Swift / swift-sdk).
 
 ### TypeScript Schema Changes
 

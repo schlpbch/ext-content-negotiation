@@ -1,6 +1,6 @@
 # Release Notes
 
-## v0.9.6 — Go, C# / .NET, and Kotlin Reference Implementations
+## v0.9.6 — Go, C# / .NET, Kotlin, and Swift Reference Implementations
 **Date**: February 27, 2026 | **Status**: Under Community Review
 
 ### Changes
@@ -15,10 +15,15 @@
   the official MCP Kotlin SDK (`kotlin-sdk`), with a `Features` data class,
   `getFeatures(ClientCapabilities?)` using `kotlinx.serialization` JsonObject
   traversal, and a full weather tool example using the `addTool` DSL
-- **README updated**: Go, C#, and Kotlin references linked throughout
-- **Spec updated**: `SDK Implementation Guidance` subsection now lists seven
+- **Swift reference implementation added**: New `SWIFT_REFERENCE.md` covering
+  the official MCP Swift SDK (`swift-sdk`), with a `Features` struct,
+  `parseFeatures(from:)` using `Value` enum pattern matching, a
+  `ContentNegotiationState` actor for safe concurrent capability access via
+  `initializeHook`, and a full weather tool example
+- **README updated**: all four references linked throughout
+- **Spec updated**: `SDK Implementation Guidance` subsection now lists eight
   ecosystem companion documents
-- **Version updated to v0.9.6** across spec and badge
+- **Version remains v0.9.6**
 
 ---
 
@@ -136,5 +141,6 @@ ext-content-negotiation/
 ├── GO_REFERENCE.md             # Go / go-sdk reference implementation
 ├── CSHARP_REFERENCE.md         # C# / .NET reference implementation
 ├── KOTLIN_REFERENCE.md         # Kotlin / kotlin-sdk reference implementation
+├── SWIFT_REFERENCE.md          # Swift / swift-sdk reference implementation
 └── RELEASE_NOTES.md            # This file
 ```

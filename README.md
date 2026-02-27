@@ -87,8 +87,9 @@ Full specification in
   [SPRING_AI_REFERENCE.md](SPRING_AI_REFERENCE.md),
   [RUST_REFERENCE.md](RUST_REFERENCE.md),
   [GO_REFERENCE.md](GO_REFERENCE.md),
-  [CSHARP_REFERENCE.md](CSHARP_REFERENCE.md), and
-  [KOTLIN_REFERENCE.md](KOTLIN_REFERENCE.md) for full worked examples)
+  [CSHARP_REFERENCE.md](CSHARP_REFERENCE.md),
+  [KOTLIN_REFERENCE.md](KOTLIN_REFERENCE.md), and
+  [SWIFT_REFERENCE.md](SWIFT_REFERENCE.md) for full worked examples)
 
 ## Feature Tags (v1.0 Registry)
 
@@ -172,7 +173,7 @@ it.
    [Issues](https://github.com/schlpbch/agentic-content-negotiation/issues) or
    [MCP Community Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions)
 3. **Test** reference implementations:
-   [TypeScript](TYPESCRIPT_REFERENCE.md) · [Python/FastMCP](FASTMCP_REFERENCE.md) · [Java/Spring AI](SPRING_AI_REFERENCE.md) · [Rust/rmcp](RUST_REFERENCE.md) · [Go](GO_REFERENCE.md) · [C#/.NET](CSHARP_REFERENCE.md) · [Kotlin](KOTLIN_REFERENCE.md)
+   [TypeScript](TYPESCRIPT_REFERENCE.md) · [Python/FastMCP](FASTMCP_REFERENCE.md) · [Java/Spring AI](SPRING_AI_REFERENCE.md) · [Rust/rmcp](RUST_REFERENCE.md) · [Go](GO_REFERENCE.md) · [C#/.NET](CSHARP_REFERENCE.md) · [Kotlin](KOTLIN_REFERENCE.md) · [Swift](SWIFT_REFERENCE.md)
 4. **Suggest** improvements to feature tags, semantics, or design
 
 ## Links
@@ -202,7 +203,8 @@ Reference implementations: [TYPESCRIPT_REFERENCE.md](TYPESCRIPT_REFERENCE.md) ·
 [RUST_REFERENCE.md](RUST_REFERENCE.md) ·
 [GO_REFERENCE.md](GO_REFERENCE.md) ·
 [CSHARP_REFERENCE.md](CSHARP_REFERENCE.md) ·
-[KOTLIN_REFERENCE.md](KOTLIN_REFERENCE.md)
+[KOTLIN_REFERENCE.md](KOTLIN_REFERENCE.md) ·
+[SWIFT_REFERENCE.md](SWIFT_REFERENCE.md)
 
 Supporting analysis: [RFC2295_ANALYSIS.md](RFC2295_ANALYSIS.md) ·
 [MCP_ANALYSIS.md](MCP_ANALYSIS.md) ·
