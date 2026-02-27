@@ -3,26 +3,16 @@
 [![Type: Extensions Track](https://img.shields.io/badge/Type-Extensions%20Track-purple?style=flat-square)](#status)
 [![Extension ID: io.modelcontextprotocol/content-negotiation](https://img.shields.io/badge/Extension-io.modelcontextprotocol/content--negotiation-brightblue?style=flat-square)](#about-this-extension)
 
-# Content Negotiation Extension for MCP
+## Overview
 
-> **📦 Official MCP Extension Proposal**
->
-> This is a proposed official MCP extension following
-> [SEP-2133: Extensions](https://modelcontextprotocol.io/community/seps/2133-extensions).
-> It introduces transparent content negotiation to allow servers to adapt
-> response formats based on client capabilities.
-
-A formal proposal for a **Content Negotiation Extension** to the Model Context
-Protocol (MCP), enabling clients to declare preferences and servers to adapt
-content format accordingly. Inspired by
+We propose a **content negotiation mechanism** following
+[SEP-2133: Extensions](https://modelcontextprotocol.io/community/seps/2133-extensions)
+that allows MCP servers to adapt response formats based on client-declared
+capabilities. Inspired by
 [RFC 2295](https://www.rfc-editor.org/rfc/rfc2295.html) (Transparent Content
 Negotiation for HTTP), adapted for MCP's session-scoped architecture.
 
-## Overview
-
-This project proposes a **content negotiation mechanism** that allows MCP
-servers to adapt response formats based on client-declared capabilities. Instead
-of serving one-size-fits-all responses, servers can:
+Instead of serving one-size-fits-all responses, servers can:
 
 - Return **JSON for AI agents** that need structured data
 - Return **markdown for humans** who need narrative explanations
@@ -30,18 +20,19 @@ of serving one-size-fits-all responses, servers can:
   agents without
 - Gate **interactive dialogs** based on client's elicitation capability
 
+This diagram illustrates the process of content negotiation between a client and
+a server in the Model Context Protocol.
+
 ![Content Negotiation Diagram](content-negotiation-diagram.png)
 
-Diagram illustrating the process of content negotiation between a client and a
-server in the Model Context Protocol. The client sends an initialization request
-specifying capabilities and preferred content formats such as JSON or markdown.
-The server evaluates these preferences and responds with content tailored to the
-client's needs, for example structured JSON for agents or markdown for humans.
-Arrows indicate the flow of requests and responses. The environment is a
-technical workflow with labeled steps and callouts. Text in the image includes
-labels like Client, Server, Initialize with capabilities, and Response with
-negotiated content. The tone is neutral and informative, focusing on technical
-clarity.
+The client sends an initialization request specifying capabilities and preferred
+content formats such as JSON or markdown. The server evaluates these preferences
+and responds with content tailored to the client's needs, for example structured
+JSON for agents or markdown for humans. Arrows indicate the flow of requests and
+responses. The environment is a technical workflow with labeled steps and
+callouts. Text in the image includes labels like Client, Server, Initialize with
+capabilities, and Response with negotiated content. The tone is neutral and
+informative, focusing on technical clarity.
 
 ## Problem Statement
 
