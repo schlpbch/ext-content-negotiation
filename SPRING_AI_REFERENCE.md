@@ -9,7 +9,7 @@ This document provides a Java reference implementation of the
 The implementation has two layers:
 
 1. **`Features`** — a Java 17 `record` with convenience methods for the most common
-   negotiation axes, mirroring the Python `Features` dataclass and TypeScript `Features`
+   negotiation axes, mirroring the Python `Features` Pydantic model and TypeScript `Features`
    class.
 2. **`ContentNegotiation.getFeatures(exchange)`** — a static helper that reads client
    capabilities from the `McpSyncServerExchange` injected by Spring AI into every `@Tool`
@@ -377,7 +377,7 @@ System.out.println(result); // → compact JSON string
   surrounding `try/catch` ensures a graceful fallback to `Features.EMPTY` on any
   unexpected shape.
 - **Java `record`**: idiomatic Java 17+; immutable, no boilerplate. Mirrors the
-  Python `Features` dataclass and TypeScript `Features` class exactly in behaviour.
+  Python `Features` Pydantic model and TypeScript `Features` class exactly in behaviour.
 - **Safe defaults**: all `Features` accessors have sensible defaults
   (`format()` → `"markdown"`, `verbosity()` → `"standard"`) so tools degrade
   gracefully when no negotiation occurred.

@@ -10,7 +10,7 @@ The implementation has three layers:
 
 1. **`ContentNegotiationMiddleware`** — captures feature tags from the
    `initialize` handshake and stores them in session state.
-2. **`Features`** — a dataclass with convenience properties for the most
+2. **`Features`** — a Pydantic `BaseModel` with convenience properties for the most
    common negotiation axes.
 3. **`get_features(ctx)`** — retrieves the negotiated `Features` from any
    tool or resource handler.

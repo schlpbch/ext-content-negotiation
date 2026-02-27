@@ -9,7 +9,7 @@ This document provides a TypeScript reference implementation of the
 The implementation has two layers:
 
 1. **`Features`** — a class with convenience properties for the most common
-   negotiation axes, mirroring the Python `Features` dataclass.
+   negotiation axes, mirroring the Python `Features` Pydantic model.
 2. **`getFeatures(mcp)`** — reads client capabilities from the `McpServer`
    instance and returns a `Features` object. No middleware required; the
    high-level `McpServer` exposes its underlying `Server` via `mcpServer.server`,
