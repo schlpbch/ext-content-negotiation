@@ -9,7 +9,7 @@
   - Aaron Sempf <sempfa@amazon.com>
   - Andreas Schlapbach <andreas.schlapbach@sbb.ch>
 - **Sponsor**: (Seeking)
-- **PR**: (To be filled)
+- **PR**: https://github.com/modelcontextprotocol/modelcontextprotocol/pull/2317
 - **Extension Repository**: (To be created at
   `https://github.com/modelcontextprotocol/ext-content-negotiation`)
 
