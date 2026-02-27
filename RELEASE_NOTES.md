@@ -5,6 +5,7 @@
 
 ### Changes
 - **Abstract added to SEP-2053 comparison**: `SEP2053_COMPARISON.md` now opens with a concise abstract summarising the shared motivation, the key design divergence, and the complementarity of the two proposals
+- **Spec header updated**: `Version` field in `ext-content-negotiation.md` bumped to `v0.9.3`
 
 ---
 
