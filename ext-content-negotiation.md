@@ -1,4 +1,4 @@
-# SEP-XXXX: Content Negotiation Extension
+# SEP-2290: Content Negotiation Extension
 
 - **Status**: Draft
 - **Version**: v0.9.3
