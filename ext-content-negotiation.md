@@ -992,6 +992,9 @@ mutually exclusive. A server could implement both — SEP-2053 variants to selec
 *which tool surface* to expose, and this extension to shape *how results are
 formatted* within that surface.
 
+For a detailed side-by-side comparison of design rationales, security models,
+and implementation trade-offs, see [SEP2053_COMPARISON.md](./SEP2053_COMPARISON.md).
+
 ## Backward Compatibility
 
 This extension is **fully backward compatible** with the core MCP protocol,

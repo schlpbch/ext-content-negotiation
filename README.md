@@ -78,6 +78,7 @@ Full specification in
 - **Motivation** - 6 real-world use cases + 4 workaround analyses
 - **Specification** - New capabilities, feature tags, examples
 - **Rationale** - Design decisions, RFC 2295 mapping, alternatives considered
+  (including comparison with [SEP-2053: Server Variants](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/2053))
 - **Backward Compatibility** - No breaking changes, migration path
 - **Security Implications** - 5 risks analyzed with mitigations
 - **Reference Implementation** - TypeScript schemas, helper functions, examples
@@ -189,7 +190,8 @@ it.
 
 Supporting analysis: [RFC2295_ANALYSIS.md](RFC2295_ANALYSIS.md) ·
 [MCP_ANALYSIS.md](MCP_ANALYSIS.md) ·
-[MCP_PROPOSAL_GUIDE.md](MCP_PROPOSAL_GUIDE.md)
+[MCP_PROPOSAL_GUIDE.md](MCP_PROPOSAL_GUIDE.md) ·
+[SEP2053_COMPARISON.md](SEP2053_COMPARISON.md)
 
 This proposal follows MCP's licensing model. For questions, open an issue or
 discussion.
